@@ -1,0 +1,30 @@
+{
+  "name": "akyc",
+  "version": "1.0.0",
+  "description": "Social Media Website",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-handlebars": "^5.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alikonuk12/AKYC.git"
+  },
+  "keywords": [
+    "Social",
+    "Media"
+  ],
+  "author": "alikonuk12",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alikonuk12/AKYC/issues"
+  },
+  "homepage": "https://github.com/alikonuk12/AKYC#readme"
+}
