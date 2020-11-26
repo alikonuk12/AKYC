@@ -7,6 +7,10 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const connectMongo = require('connect-mongo');
+const Handlebars = require('handlebars');
+const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-access');
+const fileUpload = require('express-fileupload');
+const generateDate = require("./helpers/generateDate").generateDate;
 
 mongoose.connect('mongodb://127.0.0.1/akyc_db', {
     useNewUrlParser: true,
@@ -14,6 +18,8 @@ mongoose.connect('mongodb://127.0.0.1/akyc_db', {
     useFindAndModify: false,
     useCreateIndex: true
 });
+
+app.use(fileUpload());
 
 const MongoStore = connectMongo(session);
 
@@ -33,7 +39,14 @@ app.use((req, res, next) => {
 
 app.use(express.static('public'));
 
-app.engine('handlebars', exphbs());
+const hbs = exphbs.create({
+    handlebars: allowInsecurePrototypeAccess(Handlebars),
+    helpers: {
+      generateDate: generateDate
+    }
+  });
+
+app.engine("handlebars", hbs.engine);
 app.set('view engine', 'handlebars');
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -56,8 +69,11 @@ app.use((req, res, next) => {
 
 const main = require('./routes/main');
 const users = require('./routes/users');
+const posts = require('./routes/posts');
+
 app.use('/', main);
 app.use('/users', users);
+app.use('/posts', posts);
 
 
 
