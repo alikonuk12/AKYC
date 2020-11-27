@@ -54,7 +54,9 @@ router.get('/logout', (req, res) => {
 
 router.get('/:id', (req, res) => {
     User.findById(req.params.id).then(user => {
-        res.render('site/user-profile', { user: user });
+        Post.find({user: user._id, isDeleted: false}).then(posts =>{
+            res.render('site/my-profile', { user: user, posts: posts });
+        });        
     });
 });
 

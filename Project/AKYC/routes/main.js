@@ -1,11 +1,14 @@
 const express = require('express');
 const Post = require('../models/Post');
+const User = require('../models/User');
 const router = express.Router();
 
 router.get('/', function (req, res) {
     if (req.session.userId) {
-        Post.find({}).then(posts => {
-            res.render('site/index', { posts: posts });
+        Post.find({isDeleted: false}).then(posts => {
+            User.findById({_id: req.session.userId}).then(user => {
+                res.render('site/index', { posts: posts, user: user });
+            });
         });
     } else {
         res.render('site/sign-in');
