@@ -3,16 +3,19 @@ const mongoose = require('mongoose');
 //SALT_WORK_FACTOR = 10; 
 
 const UserSchema = new mongoose.Schema({
-    username: { type: String, require: true, unique: true },
-    name: { type: String, require: true },
-    surname: { type: String, require: true },
-    email: { type: String, require: true, unique: true },
+    username: { type: String, required: true, unique: true },
+    name: { type: String, required: true },
+    surname: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
     birthdate: { type: Date },
-    city: { type: String },
-    password: { type: String, require: true },
+    city: { type: String, required: true },
+    job: { type: String, required: true },
+    password: { type: String, required: true },
     profile_image: { type: String },
     cover_image: { type: String },
-    isVerified: { type: Boolean, require: true, default: false }
+    follower: {type: Schema.Types.ObjectId, ref: 'followers'},
+    following: {type: Schema.Types.ObjectId, ref: 'followings'},
+    isVerified: { type: Boolean, required: true, default: false }
 });
 
 /* 
