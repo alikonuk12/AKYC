@@ -10,6 +10,8 @@ const UserSchema = new mongoose.Schema({
     birthdate: { type: Date },
     city: { type: String },
     password: { type: String, require: true },
+    profile_image: { type: String },
+    cover_image: { type: String },
     isVerified: { type: Boolean, require: true, default: false }
 });
 
