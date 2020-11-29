@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/', function (req, res) {
     if (req.session.userId) {
-        Post.find({isDeleted: false}).then(posts => {
+        Post.find({isDeleted: false}).populate({path:'user', model: User}).sort({$natural: -1}).then(posts => {
             User.findById({_id: req.session.userId}).then(user => {
                 res.render('site/index', { posts: posts, user: user });
             });
@@ -47,12 +47,6 @@ router.get('/profile-account-setting', function (req, res) {
     }
 });
 
-router.get('/my-profile', function (req, res) {
-    if (req.session.userId) {
-        res.render('site/my-profile');
-    } else {
-        res.render('site/sign-in');
-    }
-});
+
 
 module.exports = router;

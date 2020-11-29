@@ -22,6 +22,7 @@ router.post('/newpost', (req, res) => {
     res.redirect('/');
 });
 
+// DELETE POST
 router.post('/:id', (req, res) => {
     if (req.session.userId) {
         Post.findOne({_id: req.params.id}).then(post =>{

@@ -14,8 +14,8 @@
 									</div>
 									<!--username-dt end-->
 									<div class="user-specs">
-										<h3>John Doe</h3>
-										<span>Graphic Designer at Self Employed</span>
+										<h3>{{user.name}} {{user.surname}}</h3>
+										<span>{{user.job}}</span>
 									</div>
 								</div>
 								<!--user-profile end-->
@@ -29,7 +29,7 @@
 										<span>155</span>
 									</li>
 									<li>
-										<a href="my-profile.html" title="">View Profile</a>
+										<a href="/users/{{user._id}}" title="">View Profile</a>
 									</li>
 								</ul>
 							</div>
@@ -342,7 +342,7 @@
 											<div class="usy-dt">
 												<img src="images/resources/us-pc2.png" alt="">
 												<div class="usy-name">
-													<h3>John Doe</h3>
+													<h3>{{user.name}} {{user.surname}}</h3>
 													<span><img src="images/clock.png" alt="">{{ generateDate date 'DD-MM-YYYY' }}</span>
 												</div>
 											</div>
@@ -360,8 +360,8 @@
 										</div>
 										<div class="epi-sec">
 											<ul class="descp">
-												<li><img src="images/icon8.png" alt=""><span>Epic Coder</span></li>
-												<li><img src="images/icon9.png" alt=""><span>India</span></li>
+												<li><img src="images/icon8.png" alt=""><span>{{user.job}}</span></li>
+												<li><img src="images/icon9.png" alt=""><span>{{user.city}}</span></li>
 											</ul>
 											<ul class="bk-links">
 												<li><a href="#" title=""><i class="la la-bookmark"></i></a></li>
