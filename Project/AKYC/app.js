@@ -71,11 +71,13 @@ const main = require('./routes/main');
 const users = require('./routes/users');
 const posts = require('./routes/posts');
 const likepost = require('./routes/likepost');
+const comment = require('./routes/comments');
 
 app.use('/', main);
 app.use('/users', users);
 app.use('/posts', posts);
 app.use('/likepost', likepost);
+app.use('/comments', comment);
 
 
 app.listen(port, hostname, () => {

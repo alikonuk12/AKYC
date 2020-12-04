@@ -341,8 +341,8 @@
 										<div class="post_topbar">
 											<div class="usy-dt">
 												<img src="images/resources/us-pc2.png" alt="">
-												<div class="usy-name">
-													<h3>{{user.name}} {{user.surname}}</h3>
+												<div class="usy-name" style="margin-top: 2%;">
+													<h2 style="font-weight: bold;">{{user.username}}</h2>
 													<span><img src="images/clock.png"
 															alt="">{{ generateDate date 'DD-MM-YYYY' }}</span>
 												</div>
@@ -402,54 +402,21 @@
 										<div class="comment-sec">
 											<ul>
 												<li>
+													{{#each comment}}
 													<div class="comment-list">
 														<div class="bg-img">
 															<img src="images/resources/bg-img1.png" alt="">
 														</div>
 														<div class="comment">
-															<h3>John Doe</h3>
-															<span><img src="images/clock.png" alt=""> 3 min ago</span>
-															<p>Lorem ipsum dolor sit amet, </p>
+															<h3>{{username}}</h3>
+															<span><img src="images/clock.png" alt=""> {{ generateDate date 'DD-MM-YYYY' }}</span>
+															<p>{{content}}</p>
 															<a href="#" title="" class="active"><i
 																	class="fa fa-reply-all"></i>Reply</a>
 														</div>
 													</div>
 													<!--comment-list end-->
-													<ul>
-														<li>
-															<div class="comment-list">
-																<div class="bg-img">
-																	<img src="images/resources/bg-img2.png" alt="">
-																</div>
-																<div class="comment">
-																	<h3>John Doe</h3>
-																	<span><img src="images/clock.png" alt=""> 3 min
-																		ago</span>
-																	<p>Hi John </p>
-																	<a href="#" title=""><i
-																			class="fa fa-reply-all"></i>Reply</a>
-																</div>
-															</div>
-															<!--comment-list end-->
-														</li>
-													</ul>
-												</li>
-												<li>
-													<div class="comment-list">
-														<div class="bg-img">
-															<img src="images/resources/bg-img3.png" alt="">
-														</div>
-														<div class="comment">
-															<h3>John Doe</h3>
-															<span><img src="images/clock.png" alt=""> 3 min ago</span>
-															<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-																Aliquam luctus hendrerit metus, ut ullamcorper quam
-																finibus at.</p>
-															<a href="#" title=""><i
-																	class="fa fa-reply-all"></i>Reply</a>
-														</div>
-													</div>
-													<!--comment-list end-->
+													{{/each}}									
 												</li>
 											</ul>
 										</div>
@@ -459,8 +426,9 @@
 												<img src="images/resources/bg-img4.png" alt="">
 											</div>
 											<div class="comment_box">
-												<form>
-													<input type="text" placeholder="Post a comment">
+												<form action="/comments/newcomment" method="POST">
+													<input type="text" name="content" placeholder="Post a comment">
+													<input type="text" name="post" value="{{_id}}" hidden>
 													<button type="submit">Send</button>
 												</form>
 											</div>
@@ -1004,3 +972,4 @@
 		);
 	});
 </script>
+
