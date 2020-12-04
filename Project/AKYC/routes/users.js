@@ -54,9 +54,9 @@ router.get('/logout', (req, res) => {
 
 router.get('/:id', (req, res) => {
     User.findById(req.params.id).then(user => {
-        Post.find({user: user._id, isDeleted: false}).populate({path:'user', model: User}).sort({$natural: -1}).then(posts =>{
+        Post.find({ user: user._id, isDeleted: false }).populate({ path: 'user', model: User }).sort({ $natural: -1 }).then(posts => {
             res.render('site/my-profile', { user: user, posts: posts });
-        });        
+        });
     });
 });
 

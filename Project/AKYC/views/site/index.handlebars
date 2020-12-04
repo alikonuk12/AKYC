@@ -343,7 +343,8 @@
 												<img src="images/resources/us-pc2.png" alt="">
 												<div class="usy-name">
 													<h3>{{user.name}} {{user.surname}}</h3>
-													<span><img src="images/clock.png" alt="">{{ generateDate date 'DD-MM-YYYY' }}</span>
+													<span><img src="images/clock.png"
+															alt="">{{ generateDate date 'DD-MM-YYYY' }}</span>
 												</div>
 											</div>
 											<div class="ed-opts">
@@ -369,15 +370,18 @@
 											</ul>
 										</div>
 										<div class="job_descp">
-											<div class="blog-image"><img src="{{post_image}}" class="img-fluid"/></div>
+											<div class="blog-image"><img src="{{post_image}}" class="img-fluid" /></div>
 											<p>{{content}}<br><a href="#" title="">view more</a></p>
 										</div>
 										<div class="job-status-bar">
 											<ul class="like-com">
 												<li>
-													<a href="#"><i class="fas fa-heart"></i> Like</a>
+													<a id={{ _id }} onclick="actOnPost(event);" data-post-id="{{ _id }}" class="likeText"> Like</a>
 													<img src="images/liked-img.png" alt="">
-													<span>25</span>
+													<span data-toggle="collapse" href="#collapseExample{{_id}}"
+														role="button" aria-expanded="false"
+														aria-controls="collapseExample"
+														id="likes-count-{{ _id }}">{{ like_number }}</span>
 												</li>
 												<li><a href="#" class="com"><i class="fas fa-comment-alt"></i> Comment
 														15</a></li>
@@ -385,6 +389,11 @@
 											<a href="#"><i class="fas fa-eye"></i>Views 50</a>
 										</div>
 									</div>
+									<!--<div class="collapse" id="collapseExample{{_id}}">
+										<div class="card card-body">
+											
+										</div>
+									</div>-->
 									<!--post-bar end-->
 									<div class="comment-section">
 										<a href="#" class="plus-ic">
@@ -934,3 +943,64 @@
 
 </div>
 <!--theme-layout end-->
+
+
+<!-- in index.hbs -->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+	var updatePostStats = {
+		Like: function (postId) {
+			document.querySelector('#likes-count-' + postId).textContent++;
+		},
+		Unlike: function (postId) {
+			document.querySelector('#likes-count-' + postId).textContent--;
+		}
+	};
+
+	var toggleButtonText = {
+		Like: function (button) {
+			button.textContent = "Unlike";
+		},
+		Unlike: function (button) {
+			button.textContent = "Like";
+		}
+	};
+
+	var actOnPost = function (event) {
+		var postId = event.target.dataset.postId;
+		var action = event.target.textContent.trim();
+		toggleButtonText[action](event.target);
+		updatePostStats[action](postId);
+		axios.post('/posts/' + postId + '/act', { action: action });
+	};
+</script>
+
+
+<script>
+
+	$(document).ready(function () {
+		$.ajax(
+			{
+				type: 'GET',
+				url: '/likepost/like',
+				contentType: 'application/json',
+				success: function (response) {
+					let user_likes = response.data;
+					let like_text = document.getElementsByClassName('likeText');
+
+					for (let i = 0; i < like_text.length; i++) {
+						for (let j = 0; j < user_likes.length; j++) {
+							if (like_text[i].id == user_likes[j].post) {
+								like_text[i].innerHTML = 'Unlike';
+								break;
+							}
+						}
+					}
+				},
+				failure: function (response) {
+					console.log(response);
+				}
+			}
+		);
+	});
+</script>

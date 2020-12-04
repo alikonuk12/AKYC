@@ -42,9 +42,9 @@ app.use(express.static('public'));
 const hbs = exphbs.create({
     handlebars: allowInsecurePrototypeAccess(Handlebars),
     helpers: {
-      generateDate: generateDate
+        generateDate: generateDate
     }
-  });
+});
 
 app.engine("handlebars", hbs.engine);
 app.set('view engine', 'handlebars');
@@ -70,11 +70,12 @@ app.use((req, res, next) => {
 const main = require('./routes/main');
 const users = require('./routes/users');
 const posts = require('./routes/posts');
+const likepost = require('./routes/likepost');
 
 app.use('/', main);
 app.use('/users', users);
 app.use('/posts', posts);
-
+app.use('/likepost', likepost);
 
 
 app.listen(port, hostname, () => {

@@ -14,8 +14,8 @@ const UserSchema = new mongoose.Schema({
     password: { type: String, required: true },
     profile_image: { type: String },
     cover_image: { type: String },
-    follower: {type: Schema.Types.ObjectId, ref: 'followers'},
-    following: {type: Schema.Types.ObjectId, ref: 'followings'},
+    follower: { type: Schema.Types.ObjectId, ref: 'followers' },
+    following: { type: Schema.Types.ObjectId, ref: 'followings' },
     isVerified: { type: Boolean, required: true, default: false }
 });
 
