@@ -163,7 +163,7 @@
 										<li data-tab="saved-jobs">
 											<a href="#" title="">
 												<img src="/images/ic4.png" alt="">
-												<span>Jobs</span>
+												<span>Yorumlarım</span>
 											</a>
 										</li>
 										<li data-tab="my-bids">
@@ -184,12 +184,13 @@
 												<span>Reviews</span>
 											</a>
 										</li>
+										<!--
 										<li data-tab="payment-dd">
 											<a href="#" title="">
 												<img src="/images/ic6.png" alt="">
 												<span>Payment</span>
 											</a>
-										</li>
+										</li>-->
 
 									</ul>
 								</div><!-- tab-feed end-->
@@ -199,8 +200,8 @@
 								<ul class="nav nav-tabs" id="myTab" role="tablist">
 									<li class="nav-item">
 										<a class="nav-link active" id="mange-tab" data-toggle="tab" href="#mange"
-											role="tab" aria-controls="home" aria-selected="true">Manage Jobs</a>
-									</li>
+											role="tab" aria-controls="home" aria-selected="true">Yorumlarım</a>
+									</li><!--
 									<li class="nav-item">
 										<a class="nav-link" id="saved-tab" data-toggle="tab" href="#saved" role="tab"
 											aria-controls="profile" aria-selected="false">Saved Jobs</a>
@@ -213,31 +214,34 @@
 										<a class="nav-link" id="cadidates-tab" data-toggle="tab" href="#cadidates"
 											role="tab" aria-controls="contact" aria-selected="false">Applied
 											cadidates</a>
-									</li>
+									</li>-->
 								</ul>
 								<div class="tab-content" id="myTabContent">
 									<div class="tab-pane fade show active" id="mange" role="tabpanel"
 										aria-labelledby="mange-tab">
+										{{#each comments}}
 										<div class="posts-bar">
 											<div class="post-bar bgclr">
 												<div class="wordpressdevlp">
-													<h2>Senior Wordpress Developer</h2>
+													<h2>{{content}}</h2>
 
-													<p><i class="la la-clock-o"></i>Posted on 30 August 2018</p>
+													<p><i class="la la-clock-o"></i>{{generateDate date 'YYYY-MM-DD'}}</p>
 												</div>
 												<br>
 												<div class="row no-gutters">
 													<div class="col-md-6 col-sm-12">
 														<div class="cadidatesbtn">
-															<button type="button" class="btn btn-primary">
-																<span class="badge badge-light">3</span>Candidates
+															<form action="/comments/{{_id}}" method="POST">
+															<button type="submit" class="btn btn-primary">
+																Bu Yorumu Sil
 															</button>
-															<a href="#">
+															</form>
+															<!--<a href="#">
 																<i class="far fa-edit"></i>
 															</a>
 															<a href="#">
 																<i class="far fa-trash-alt"></i>
-															</a>
+															</a>-->
 														</div>
 													</div>
 													<div class="col-md-6 col-sm-12">
@@ -251,7 +255,8 @@
 												</div>
 											</div>
 										</div>
-										<div class="posts-bar">
+										{{/each}} 
+										<!--<div class="posts-bar">
 											<div class="post-bar bgclr">
 												<div class="wordpressdevlp">
 													<h2>Senior Php Developer</h2>
@@ -322,7 +327,7 @@
 													</div>
 												</div>
 											</div>
-										</div>
+										</div>-->
 									</div>
 									<div class="tab-pane fade" id="saved" role="tabpanel" aria-labelledby="saved-tab">
 										<div class="post-bar">

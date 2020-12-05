@@ -6,6 +6,7 @@ const User = require('../models/User');
 const Like = require('../models/Like');
 const mongoose = require('mongoose');
 
+//CREATE POST
 router.post('/newpost', (req, res) => {
     if (req.files) {
         let post_image = req.files.post_image;

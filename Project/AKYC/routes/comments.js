@@ -4,22 +4,28 @@ const Comment = require('../models/Comment');
 const Post = require('../models/Post');
 const User = require('../models/User');
 
+//CREATE COMMENT
 router.post('/newcomment', (req, res) => {
-    User.find({_id: req.session.userId}).then(online => {
-    Comment.create({
-        ...req.body,
-        username: online[0].username
-    }).then(comment => {
-        Post.findByIdAndUpdate(req.body.post, {$push: {"comment": comment._id}}, {safe: true, upsert: true}, () => {});
+    User.find({ _id: req.session.userId }).then(online => {
+        Comment.create({
+            ...req.body,
+            username: online[0].username,
+            user: req.session.userId
+        }).then(comment => {
+            Post.findByIdAndUpdate(req.body.post, { $push: { "comment": comment._id } }, { safe: true, upsert: true }, () => { });
+        });
+        res.redirect('/');
     });
-    res.redirect('/');
-});
 });
 
-router.get('/user', (req,res) => {
-    User.find({_id: req.session.userId}).then(user => {
-        return res.status(200).json({ data: user });
-    })
-})
+//DELETE COMMENT
+router.post('/:id', (req, res) => {
+    if (req.session.userId) {
+        Comment.deleteOne({ _id: req.params.id }, () => {});
+        res.redirect('/');
+    } else {
+        res.render('site/sign-in');
+    }
+});
 
 module.exports = router;

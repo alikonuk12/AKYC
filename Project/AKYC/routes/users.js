@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
 const Post = require('../models/Post');
+const Comment = require('../models/Comment');
 
 
 router.get('/sign-in', (req, res) => {
@@ -55,7 +56,9 @@ router.get('/logout', (req, res) => {
 router.get('/:id', (req, res) => {
     User.findById(req.params.id).then(user => {
         Post.find({ user: user._id, isDeleted: false }).populate({ path: 'user', model: User }).sort({ $natural: -1 }).then(posts => {
-            res.render('site/my-profile', { user: user, posts: posts });
+            Comment.find({ user: req.session.userId }).sort({ $natural: -1 }).then(comments => {
+                res.render('site/my-profile', { user: user, posts: posts, comments: comments });
+            });
         });
     });
 });
