@@ -856,10 +856,11 @@
 													<img src="/images/resources/bg-img4.png" alt="">
 												</div>
 												<div class="comment_box">
-													<form>
-														<input type="text" placeholder="Post a comment">
-														<button type="submit">Send</button>
-													</form>
+													<form action="/comments/newcomment" method="POST">
+													<input type="text" name="content" placeholder="Post a comment">
+													<input type="text" name="post" value="{{_id}}" hidden>
+													<button type="submit">Send</button>
+												</form>
 												</div>
 											</div>
 											<!--post-comment end-->

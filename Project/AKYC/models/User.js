@@ -12,7 +12,7 @@ const UserSchema = new mongoose.Schema({
     city: { type: String, required: true },
     job: { type: String, required: true },
     password: { type: String, required: true },
-    profile_image: { type: String },
+    profile_image: { type: String, default:"" },
     cover_image: { type: String },
     follower: { type: Schema.Types.ObjectId, ref: 'followers' },
     following: { type: Schema.Types.ObjectId, ref: 'followings' },
