@@ -64,58 +64,39 @@
 								</div>
 							  	<div class="tab-pane fade" id="nav-status" role="tabpanel" aria-labelledby="nav-status-tab">
 							  		<div class="acc-setting">
-							  			<h3>Profile Status</h3>
+							  			<h3>Profil Bilgileri</h3>
 							  			<div class="profile-bx-details">
-							  				<div class="row">
-							  					<div class="col-lg-3 col-md-6 col-sm-12">
-							  						<div class="profile-bx-info">
-							  							<div class="pro-bx">
-							  								<img src="images/pro-icon1.png" alt="">
-							  								<div class="bx-info">
-							  									<h3>$5,145</h3>
-							  									<h5>Total Income</h5>
-							  								</div><!--bx-info end-->
-							  							</div><!--pro-bx end-->
-							  							<p>Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
-							  						</div><!--profile-bx-info end-->
-							  					</div>
-							  					<div class="col-lg-3 col-md-6 col-sm-12">
-							  						<div class="profile-bx-info">
-							  							<div class="pro-bx">
-							  								<img src="images/pro-icon2.png" alt="">
-							  								<div class="bx-info">
-							  									<h3>$4,745</h3>
-							  									<h5>Widthraw</h5>
-							  								</div><!--bx-info end-->
-							  							</div><!--pro-bx end-->
-							  							<p>Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
-							  						</div><!--profile-bx-info end-->
-							  					</div>
-							  					<div class="col-lg-3 col-md-6 col-sm-12">
-							  						<div class="profile-bx-info">
-							  							<div class="pro-bx">
-							  								<img src="images/pro-icon3.png" alt="">
-							  								<div class="bx-info">
-							  									<h3>$1,145</h3>
-							  									<h5>Sent</h5>
-							  								</div><!--bx-info end-->
-							  							</div><!--pro-bx end-->
-							  							<p>Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
-							  						</div><!--profile-bx-info end-->
-							  					</div>
-							  					<div class="col-lg-3 col-md-6 col-sm-12">
-							  						<div class="profile-bx-info">
-							  							<div class="pro-bx">
-							  								<img src="images/pro-icon4.png" alt="">
-							  								<div class="bx-info">
-							  									<h3>130</h3>
-							  									<h5>Total Projects</h5>
-							  								</div><!--bx-info end-->
-							  							</div><!--pro-bx end-->
-							  							<p>Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
-							  						</div><!--profile-bx-info end-->
-							  					</div>
-							  				</div>
+							  				<form action="/users/updateprofile" method="POST">
+											<div class="cp-field">
+												<h5>Ad</h5>
+												<div class="cpp-fiel">
+													<input type="text" name="name" placeholder="Ad" value="{{user.name}}">
+												</div>
+											</div>
+											<div class="cp-field">
+												<h5>Soyad</h5>
+												<div class="cpp-fiel">
+													<input type="text" name="surname" placeholder="Soyad" value="{{user.surname}}">
+												</div>
+											</div>
+											<div class="cp-field">
+												<h5>Şehir</h5>
+												<div class="cpp-fiel">
+													<input type="text" name="city" placeholder="Şehir" value="{{user.city}}">
+												</div>
+											</div>
+											<div class="cp-field">
+												<h5>Meslek</h5>
+												<div class="cpp-fiel">
+													<input type="text" name="job" placeholder="Meslek" value="{{user.job}}">
+												</div>
+											</div>
+											<div class="save-stngs pd2">
+												<ul>
+													<li><button type="submit">Değişiklikleri Kaydet</button></li>
+												</ul>
+											</div><!--save-stngs end-->
+										</form>
 							  			</div><!--profile-bx-details end-->
 							  			<div class="pro-work-status">
 							  				<!-- <h4>Work Status  -  Last Months Working Status</h4> -->

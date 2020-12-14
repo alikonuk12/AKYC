@@ -63,5 +63,17 @@ router.get('/:id', (req, res) => {
     });
 });
 
+router.post('/updateprofile', (req, res) => {
+    const { name, surname, city, job } = req.body;
+    User.findById(req.session.userId).then(user => {
+        user.name = name;
+        user.surname = surname;
+        user.city = city;
+        user.job = job;
+        user.save();
+        res.redirect("/");
+    });
+
+});
 
 module.exports = router;

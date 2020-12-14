@@ -396,9 +396,9 @@
 									</div>-->
 									<!--post-bar end-->
 									<div class="comment-section">
-										<a href="#" class="plus-ic">
+										{{!-- <a href="#" class="plus-ic">
 											<i class="la la-plus"></i>
-										</a>
+										</a> --}}
 										<div class="comment-sec">
 											<ul>
 												<li>
@@ -427,9 +427,9 @@
 											</div>
 											<div class="comment_box">
 												<form action="/comments/newcomment" method="POST">
-													<input type="text" name="content" placeholder="Post a comment">
+													<input style="max-width: 74%;" type="text" name="content" placeholder="Yorum ekle">
 													<input type="text" name="post" value="{{_id}}" hidden>
-													<button type="submit">Send</button>
+													<button type="submit">Gönder</button>
 												</form>
 											</div>
 										</div>

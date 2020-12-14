@@ -45,7 +45,9 @@ router.get('/messages', function (req, res) {
 
 router.get('/profile-account-setting', function (req, res) {
     if (req.session.userId) {
-        res.render('site/profile-account-setting');
+        User.findById({ _id: req.session.userId }).then(user => {
+            res.render('site/profile-account-setting', { user: user });
+        });
     } else {
         res.render('site/sign-in');
     }
