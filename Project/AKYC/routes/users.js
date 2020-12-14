@@ -3,6 +3,8 @@ const router = express.Router();
 const User = require('../models/User');
 const Post = require('../models/Post');
 const Comment = require('../models/Comment');
+const path = require('path');
+const VerRequest = require('../models/VerRequest');
 
 
 router.get('/sign-in', (req, res) => {
@@ -73,7 +75,16 @@ router.post('/updateprofile', (req, res) => {
         user.save();
         res.redirect("/");
     });
+});
 
+router.post('/verificationrequest', (req, res) => {
+    const idcard = req.files.idcard_image;
+    idcard.mv(path.resolve(__dirname, '../public/images/idcard', idcard.name));
+    VerRequest.create({
+        user: req.session.userId,
+        idcard_image: `/images/idcard/${idcard.name}`
+    });
+    res.redirect("/");
 });
 
 module.exports = router;
