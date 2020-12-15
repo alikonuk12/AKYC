@@ -56,7 +56,7 @@ router.get('/logout', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-    User.findById(req.params.id).then(user => {
+    User.findById(req.session.userId).then(user => {
         Post.find({ user: user._id, isDeleted: false }).populate({ path: 'user', model: User }).populate({ path: 'comment', model: Comment }).sort({ $natural: -1 }).then(posts => {
             Comment.find({ user: req.session.userId }).sort({ $natural: -1 }).then(comments => {
                 res.render('site/my-profile', { user: user, posts: posts, comments: comments });
@@ -85,6 +85,16 @@ router.post('/verificationrequest', (req, res) => {
         idcard_image: `/images/idcard/${idcard.name}`
     });
     res.redirect("/");
+});
+
+router.get('/profile/:id', (req, res) => {
+    User.findById(req.params.id).then(user => {
+        Post.find({ user: user._id, isDeleted: false }).populate({ path: 'user', model: User }).populate({ path: 'comment', model: Comment }).sort({ $natural: -1 }).then(posts => {
+            Comment.find({ user: req.session.userId }).sort({ $natural: -1 }).then(comments => {
+                res.render('site/user-profile', { user: user, posts: posts, comments: comments });
+            });
+        });
+    });
 });
 
 module.exports = router;

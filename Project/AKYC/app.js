@@ -74,13 +74,14 @@ const users = require('./routes/users');
 const posts = require('./routes/posts');
 const likepost = require('./routes/likepost');
 const comment = require('./routes/comments');
+const search = require('./routes/search');
 
 app.use('/', main);
 app.use('/users', users);
 app.use('/posts', posts);
 app.use('/likepost', likepost);
 app.use('/comments', comment);
-
+app.use('/search', search);
 
 app.listen(port, hostname, () => {
     console.log(`Server çalışıyor, http://${hostname}:${port}/`);

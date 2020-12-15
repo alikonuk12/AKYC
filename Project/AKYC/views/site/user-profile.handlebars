@@ -1,5 +1,5 @@
 <section class="cover-sec">
-	<img src="images/resources/cover-img.jpg" alt="">
+	<img src="/images/resources/cover-img.jpg" alt="">
 </section>
 
 
@@ -12,7 +12,7 @@
 						<div class="main-left-sidebar">
 							<div class="user_profile">
 								<div class="user-pro-img">
-									<img src="images/resources/user-pro-img.png" alt="">
+									<img src="/images/resources/user-pro-img.png" alt="">
 								</div>
 								<!--user-pro-img end-->
 								<div class="user_pro_status">
@@ -119,9 +119,9 @@
 					<div class="col-lg-6">
 						<div class="main-ws-sec">
 							<div class="user-tab-sec">
-								<h3>John Doe</h3>
+								<h3>{{user.name}} {{user.surname}}</h3>
 								<div class="star-descp">
-									<span>Graphic Designer at Self Employed</span>
+									<span>{{user.job}}</span>
 									<ul>
 										<li><i class="fa fa-star"></i></li>
 										<li><i class="fa fa-star"></i></li>
@@ -157,255 +157,109 @@
 							<!--user-tab-sec end-->
 							<div class="product-feed-tab current" id="feed-dd">
 								<div class="posts-section">
-									<div class="post-bar">
-										<div class="post_topbar">
-											<div class="usy-dt">
-												<img src="images/resources/us-pic.png" alt="">
-												<div class="usy-name">
-													<h3>John Doe</h3>
-													<span><img src="images/clock.png" alt="">3 min ago</span>
+									{{#each posts}}
+									<div class="posty">
+										<div class="post-bar no-margin">
+											<div class="post_topbar">
+												<div class="usy-dt">
+													<img src="/images/resources/us-pc2.png" alt="">
+													<div class="usy-name" style="margin-top: 2%;">
+														<h2 style="font-weight: bold;">{{user.username}}</h2>
+														<span><img src="/images/clock.png"
+																alt="">{{ generateDate date 'DD-MM-YYYY' }}</span>
+													</div>
+												</div>
+												<div class="ed-opts">
+													<a href="#" title="" class="ed-opts-open"><i
+															class="la la-ellipsis-v"></i></a>
+													<ul class="ed-options">
+														<li><a href="#" title="">Edit Post</a></li>
+														<li><a href="#" title="">Unsaved</a></li>
+														<li><a href="#" title="">Unbid</a></li>
+														<li><a href="#" title="">Close</a></li>
+													</ul>
 												</div>
 											</div>
-											<div class="ed-opts">
-												<a href="#" title="" class="ed-opts-open"><i
-														class="la la-ellipsis-v"></i></a>
-												<ul class="ed-options">
-													<li><a href="#" title="">Edit Post</a></li>
-													<li><a href="#" title="">Unsaved</a></li>
-													<li><a href="#" title="">Unbid</a></li>
-													<li><a href="#" title="">Close</a></li>
-													<li><a href="#" title="">Hide</a></li>
+											<div class="epi-sec">
+												<ul class="descp">
+													<li><img src="/images/icon8.png" alt=""><span>{{user.job}}</span>
+													</li>
+													<li><img src="/images/icon9.png" alt=""><span>{{user.city}}</span>
+													</li>
+												</ul>
+												<ul class="bk-links">
+													<li><a href="#" title=""><i class="la la-bookmark"></i></a></li>
+													<li><a href="#" title=""><i class="la la-envelope"></i></a></li>
 												</ul>
 											</div>
-										</div>
-										<div class="epi-sec">
-											<ul class="descp">
-												<li><img src="images/icon8.png" alt=""><span>Epic Coder</span></li>
-												<li><img src="images/icon9.png" alt=""><span>India</span></li>
-											</ul>
-											<ul class="bk-links">
-												<li><a href="#" title=""><i class="la la-bookmark"></i></a></li>
-												<li><a href="#" title=""><i class="la la-envelope"></i></a></li>
-											</ul>
-										</div>
-										<div class="job_descp">
-											<h3>Senior Wordpress Developer</h3>
-											<ul class="job-dt">
-												<li><a href="#" title="">Full Time</a></li>
-												<li><span>$30 / hr</span></li>
-											</ul>
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam luctus
-												hendrerit metus, ut ullamcorper quam finibus at. Etiam id magna sit
-												amet... <a href="#" title="">view more</a></p>
-											<ul class="skill-tags">
-												<li><a href="#" title="">HTML</a></li>
-												<li><a href="#" title="">PHP</a></li>
-												<li><a href="#" title="">CSS</a></li>
-												<li><a href="#" title="">Javascript</a></li>
-												<li><a href="#" title="">Wordpress</a></li>
-											</ul>
-										</div>
-										<div class="job-status-bar">
+											<div class="job_descp">
+												<div class="blog-image"><img src="{{post_image}}" class="img-fluid" />
+												</div>
+												<p>{{content}}<br><a href="#" title="">view more</a></p>
+											</div>
+											<div class="job-status-bar">
 											<ul class="like-com">
 												<li>
-													<a href="#"><i class="fas fa-heart"></i> Like</a>
+													<a id={{ _id }} onclick="actOnPost(event);" data-post-id="{{ _id }}" class="likeText"> Like</a>
 													<img src="images/liked-img.png" alt="">
-													<span>25</span>
+													<span style="margin-left:0%" data-toggle="collapse" href="#collapseExample{{_id}}"
+														role="button" aria-expanded="false"
+														aria-controls="collapseExample"
+														id="likes-count-{{ _id }}">{{ like_number }}</span>
 												</li>
-												<li><a href="#" class="com"><i class="fas fa-comment-alt"></i> Comments
+												<li><a href="#" class="com"><i class="fas fa-comment-alt"></i> Comment
 														15</a></li>
 											</ul>
 											<a href="#"><i class="fas fa-eye"></i>Views 50</a>
 										</div>
-									</div>
-									<!--post-bar end-->
-									<div class="post-bar">
-										<div class="post_topbar">
-											<div class="usy-dt">
-												<img src="images/resources/us-pic.png" alt="">
-												<div class="usy-name">
-													<h3>John Doe</h3>
-													<span><img src="images/clock.png" alt="">3 min ago</span>
+										</div>
+										<!--post-bar end-->
+										<div class="comment-section">
+											{{!-- <a href="#" class="plus-ic">
+												<i class="la la-plus"></i>
+											</a> --}}
+											<div class="comment-sec">
+											<ul>
+												<li>
+													{{#each comment}}
+													<div class="comment-list">
+														<div class="bg-img">
+															<img src="images/resources/bg-img1.png" alt="">
+														</div>
+														<div class="comment">
+															<h3>{{username}}</h3>
+															<span><img src="images/clock.png" alt=""> {{ generateDate date 'DD-MM-YYYY' }}</span>
+															<p>{{content}}</p>
+															<!--<a href="#" title="" class="active"><i
+                                                                    class="fa fa-times"></i>Yorumu Sil</a>-->
+														</div>
+													</div>
+													<!--comment-list end-->
+													{{/each}}									
+												</li>
+											</ul>
+										</div>
+											<!--comment-sec end-->
+											<div class="post-comment">
+												<div class="cm_img">
+													<img src="/images/resources/bg-img4.png" alt="">
+												</div>
+												<div class="comment_box">
+													<form action="/comments/newcomment" method="POST">
+													<input  style="max-width: 74%;" type="text" name="content" placeholder="Post a comment">
+													<input type="text" name="post" value="{{_id}}" hidden>
+													<button type="submit">Gönder</button>
+												</form>
 												</div>
 											</div>
-											<div class="ed-opts">
-												<a href="#" title="" class="ed-opts-open"><i
-														class="la la-ellipsis-v"></i></a>
-												<ul class="ed-options">
-													<li><a href="#" title="">Edit Post</a></li>
-													<li><a href="#" title="">Unsaved</a></li>
-													<li><a href="#" title="">Unbid</a></li>
-													<li><a href="#" title="">Close</a></li>
-													<li><a href="#" title="">Hide</a></li>
-												</ul>
-											</div>
+											<!--post-comment end-->
 										</div>
-										<div class="epi-sec">
-											<ul class="descp">
-												<li><img src="images/icon8.png" alt=""><span>Front End Developer</span>
-												</li>
-												<li><img src="images/icon9.png" alt=""><span>India</span></li>
-											</ul>
-											<ul class="bk-links">
-												<li><a href="#" title=""><i class="la la-bookmark"></i></a></li>
-												<li><a href="#" title=""><i class="la la-envelope"></i></a></li>
-												<li><a href="#" title="" class="bid_now">Bid Now</a></li>
-											</ul>
-										</div>
-										<div class="job_descp">
-											<h3>Simple Classified Site</h3>
-											<ul class="job-dt">
-												<li><span>$300 - $350</span></li>
-											</ul>
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam luctus
-												hendrerit metus, ut ullamcorper quam finibus at. Etiam id magna sit
-												amet... <a href="#" title="">view more</a></p>
-											<ul class="skill-tags">
-												<li><a href="#" title="">HTML</a></li>
-												<li><a href="#" title="">PHP</a></li>
-												<li><a href="#" title="">CSS</a></li>
-												<li><a href="#" title="">Javascript</a></li>
-												<li><a href="#" title="">Wordpress</a></li>
-											</ul>
-										</div>
-										<div class="job-status-bar">
-											<ul class="like-com">
-												<li>
-													<a href="#"><i class="fas fa-heart"></i> Like</a>
-													<img src="images/liked-img.png" alt="">
-													<span>25</span>
-												</li>
-												<li><a href="#" class="com"><i class="fas fa-comment-alt"></i> Comments
-														15</a></li>
-											</ul>
-											<a href="#"><i class="fas fa-eye"></i>Views 50</a>
-										</div>
+										<!--comment-section end-->
 									</div>
+									<!--posty end-->
+									{{/each}}
 									<!--post-bar end-->
-									<div class="post-bar">
-										<div class="post_topbar">
-											<div class="usy-dt">
-												<img src="images/resources/us-pc2.png" alt="">
-												<div class="usy-name">
-													<h3>John Doe</h3>
-													<span><img src="images/clock.png" alt="">3 min ago</span>
-												</div>
-											</div>
-											<div class="ed-opts">
-												<a href="#" title="" class="ed-opts-open"><i
-														class="la la-ellipsis-v"></i></a>
-												<ul class="ed-options">
-													<li><a href="#" title="">Edit Post</a></li>
-													<li><a href="#" title="">Unsaved</a></li>
-													<li><a href="#" title="">Unbid</a></li>
-													<li><a href="#" title="">Close</a></li>
-													<li><a href="#" title="">Hide</a></li>
-												</ul>
-											</div>
-										</div>
-										<div class="epi-sec">
-											<ul class="descp">
-												<li><img src="images/icon8.png" alt=""><span>Epic Coder</span></li>
-												<li><img src="images/icon9.png" alt=""><span>India</span></li>
-											</ul>
-											<ul class="bk-links">
-												<li><a href="#" title=""><i class="la la-bookmark"></i></a></li>
-												<li><a href="#" title=""><i class="la la-envelope"></i></a></li>
-											</ul>
-										</div>
-										<div class="job_descp">
-											<h3>Senior UI / UX designer</h3>
-											<ul class="job-dt">
-												<li><a href="#" title="">Par Time</a></li>
-												<li><span>$10 / hr</span></li>
-											</ul>
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam luctus
-												hendrerit metus, ut ullamcorper quam finibus at. Etiam id magna sit
-												amet... <a href="#" title="">view more</a></p>
-											<ul class="skill-tags">
-												<li><a href="#" title="">HTML</a></li>
-												<li><a href="#" title="">PHP</a></li>
-												<li><a href="#" title="">CSS</a></li>
-												<li><a href="#" title="">Javascript</a></li>
-												<li><a href="#" title="">Wordpress</a></li>
-											</ul>
-										</div>
-										<div class="job-status-bar">
-											<ul class="like-com">
-												<li>
-													<a href="#"><i class="fas fa-heart"></i> Like</a>
-													<img src="images/liked-img.png" alt="">
-													<span>25</span>
-												</li>
-												<li><a href="#" class="com"><i class="fas fa-comment-alt"></i> Comments
-														15</a></li>
-											</ul>
-											<a href="#"><i class="fas fa-eye"></i>Views 50</a>
-										</div>
-									</div>
-									<!--post-bar end-->
-									<div class="post-bar">
-										<div class="post_topbar">
-											<div class="usy-dt">
-												<img src="images/resources/us-pic.png" alt="">
-												<div class="usy-name">
-													<h3>John Doe</h3>
-													<span><img src="images/clock.png" alt="">3 min ago</span>
-												</div>
-											</div>
-											<div class="ed-opts">
-												<a href="#" title="" class="ed-opts-open"><i
-														class="la la-ellipsis-v"></i></a>
-												<ul class="ed-options">
-													<li><a href="#" title="">Edit Post</a></li>
-													<li><a href="#" title="">Unsaved</a></li>
-													<li><a href="#" title="">Unbid</a></li>
-													<li><a href="#" title="">Close</a></li>
-													<li><a href="#" title="">Hide</a></li>
-												</ul>
-											</div>
-										</div>
-										<div class="epi-sec">
-											<ul class="descp">
-												<li><img src="images/icon8.png" alt=""><span>Epic Coder</span></li>
-												<li><img src="images/icon9.png" alt=""><span>India</span></li>
-											</ul>
-											<ul class="bk-links">
-												<li><a href="#" title=""><i class="la la-bookmark"></i></a></li>
-												<li><a href="#" title=""><i class="la la-envelope"></i></a></li>
-												<li><a href="#" title="" class="bid_now">Bid Now</a></li>
-											</ul>
-										</div>
-										<div class="job_descp">
-											<h3>Ios Shopping mobile app</h3>
-											<ul class="job-dt">
-												<li><span>$300 - $350</span></li>
-											</ul>
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam luctus
-												hendrerit metus, ut ullamcorper quam finibus at. Etiam id magna sit
-												amet... <a href="#" title="">view more</a></p>
-											<ul class="skill-tags">
-												<li><a href="#" title="">HTML</a></li>
-												<li><a href="#" title="">PHP</a></li>
-												<li><a href="#" title="">CSS</a></li>
-												<li><a href="#" title="">Javascript</a></li>
-												<li><a href="#" title="">Wordpress</a></li>
-											</ul>
-										</div>
-										<div class="job-status-bar">
-											<ul class="like-com">
-												<li>
-													<a href="#"><i class="fas fa-heart"></i> Like</a>
-													<img src="images/liked-img.png" alt="">
-													<span>25</span>
-												</li>
-												<li><a href="#" class="com"><i class="fas fa-comment-alt"></i> Comments
-														15</a></li>
-											</ul>
-											<a href="#"><i class="fas fa-eye"></i>Views 50</a>
-										</div>
-									</div>
-									<!--post-bar end-->
+									
 									<div class="process-comm">
 										<div class="spinner">
 											<div class="bounce1"></div>
@@ -612,3 +466,62 @@
 		</div>
 	</div>
 </main>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+	var updatePostStats = {
+		Like: function (postId) {
+			document.querySelector('#likes-count-' + postId).textContent++;
+		},
+		Unlike: function (postId) {
+			document.querySelector('#likes-count-' + postId).textContent--;
+		}
+	};
+
+	var toggleButtonText = {
+		Like: function (button) {
+			button.textContent = "Unlike";
+		},
+		Unlike: function (button) {
+			button.textContent = "Like";
+		}
+	};
+
+	var actOnPost = function (event) {
+		var postId = event.target.dataset.postId;
+		var action = event.target.textContent.trim();
+		toggleButtonText[action](event.target);
+		updatePostStats[action](postId);
+		axios.post('/posts/' + postId + '/act', { action: action });
+	};
+</script>
+
+
+<script>
+
+	$(document).ready(function () {
+		$.ajax(
+			{
+				type: 'GET',
+				url: '/likepost/like',
+				contentType: 'application/json',
+				success: function (response) {
+					let user_likes = response.data;
+					let like_text = document.getElementsByClassName('likeText');
+
+					for (let i = 0; i < like_text.length; i++) {
+						for (let j = 0; j < user_likes.length; j++) {
+							if (like_text[i].id == user_likes[j].post) {
+								like_text[i].innerHTML = 'Unlike';
+								break;
+							}
+						}
+					}
+				},
+				failure: function (response) {
+					console.log(response);
+				}
+			}
+		);
+	});
+</script>
