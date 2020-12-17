@@ -97,4 +97,24 @@ router.get('/profile/:id', (req, res) => {
     });
 });
 
+router.post('/changeprofilephoto', (req, res) => {
+    const profileimage = req.files.profile_image;
+    profileimage.mv(path.resolve(__dirname, '../public/images/profileimage', profileimage.name));
+    User.findById(req.session.userId).then(user => {
+        user.profile_image = `/images/profileimage/${profileimage.name}`;
+        user.save();
+        res.redirect(req.get('referer'));
+    });
+});
+
+router.post('/changecoverphoto', (req, res) => {
+    const coverimage = req.files.cover_image;
+    coverimage.mv(path.resolve(__dirname, '../public/images/coverimage', coverimage.name));
+    User.findById(req.session.userId).then(user => {
+        user.cover_image = `/images/coverimage/${coverimage.name}`;
+        user.save();
+        res.redirect(req.get('referer'));
+    });
+});
+
 module.exports = router;

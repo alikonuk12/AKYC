@@ -3,19 +3,52 @@
 <meta name="keywords" content="" />
 
 <section class="cover-sec">
+	{{#if user.profile_image}}
+	<img src="{{user.cover_image}}" alt="">
+	{{/if}}
+	{{#unless user.cover_image}}
 	<img src="/images/resources/cover-img.jpg" alt="">
+	{{/unless}}
+	
 	<div class="add-pic-box">
 		<div class="container">
 			<div class="row no-gutters">
 				<div class="col-lg-12 col-sm-12">
 					<input type="file" id="file">
-					<label for="file">Change Image</label>
+					<label data-toggle="modal" data-target="#coverPhoto">Kapak Fotoğrafını Değiştir</label>
 				</div>
 			</div>
 		</div>
 	</div>
-</section>
 
+</section>
+<div style="margin-top: 15%;" class="modal fade" id="coverPhoto" tabindex="-1" role="dialog"
+	aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Kapak Fotoğrafı Değiştir</h5>
+			</div>
+			<form action="/users/changecoverphoto" method="POST" enctype="multipart/form-data">
+				<div class="modal-body">
+					<div style="margin-left: 15%; margin-top: 5%;">
+						<div class="col-sm-0.5">
+							<img id="blah2" src="{{user.cover_image}}" alt="Kapak Fotoğrafı" width="50" height="60">
+						</div>
+						<div class="col-sm-0.5">
+							<input style="margin-top: 3%;" type="file" id="imgInp2" name="cover_image">
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button style="color:black" type="button" class="btn btn-secondary"
+						data-dismiss="modal">Kapat</button>
+					<button style="color:black" type="submit" class="btn btn-primary">Değişiklikleri Kaydet</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
 
 <main>
 	<div class="main-section">
@@ -26,10 +59,47 @@
 						<div class="main-left-sidebar">
 							<div class="user_profile">
 								<div class="user-pro-img">
+									{{#if user.profile_image}}
+									<img src="{{user.profile_image}}" alt="">
+									{{/if}}
+									{{#unless user.profile_image}}
 									<img src="/images/resources/user-pro-img.png" alt="">
+									{{/unless}}
 									<div class="add-dp" id="OpenImgUpload">
-										<input type="file" id="file">
-										<label for="file"><i class="fas fa-camera"></i></label>
+										<label data-toggle="modal" data-target="#profilePhoto"><i
+												class="fas fa-camera"></i></label>
+									</div>
+								</div>
+								<div style="margin-top: 15%;" class="modal fade" id="profilePhoto" tabindex="-1"
+									role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="exampleModalLabel">Profil Fotoğrafı Değiştir
+												</h5>
+											</div>
+											<form action="/users/changeprofilephoto" method="POST"
+												enctype="multipart/form-data">
+												<div class="modal-body">
+													<div style="margin-left: 15%; margin-top: 5%;">
+														<div class="col-sm-0.5">
+															<img id="blahh" src="{{user.profile_image}}"
+																alt="Profil Fotoğrafı" width="60" height="70">
+														</div>
+														<div class="col-sm-0.5">
+															<input style="margin-top: 3%;" type="file" id="imgInpp"
+																name="profile_image">
+														</div>
+													</div>
+												</div>
+												<div class="modal-footer">
+													<button style="color:black" type="button" class="btn btn-secondary"
+														data-dismiss="modal">Kapat</button>
+													<button style="color:black" type="submit"
+														class="btn btn-primary">Değişiklikleri Kaydet</button>
+												</div>
+											</form>
+										</div>
 									</div>
 								</div>
 								<!--user-pro-img end-->
@@ -201,7 +271,8 @@
 									<li class="nav-item">
 										<a class="nav-link active" id="mange-tab" data-toggle="tab" href="#mange"
 											role="tab" aria-controls="home" aria-selected="true">Yorumlarım</a>
-									</li><!--
+									</li>
+									<!--
 									<li class="nav-item">
 										<a class="nav-link" id="saved-tab" data-toggle="tab" href="#saved" role="tab"
 											aria-controls="profile" aria-selected="false">Saved Jobs</a>
@@ -225,16 +296,17 @@
 												<div class="wordpressdevlp">
 													<h2>{{content}}</h2>
 
-													<p><i class="la la-clock-o"></i>{{generateDate date 'YYYY-MM-DD'}}</p>
+													<p><i class="la la-clock-o"></i>{{generateDate date 'YYYY-MM-DD'}}
+													</p>
 												</div>
 												<br>
 												<div class="row no-gutters">
 													<div class="col-md-6 col-sm-12">
 														<div class="cadidatesbtn">
 															<form action="/comments/{{_id}}" method="POST">
-															<button type="submit" class="btn btn-primary">
-																Bu Yorumu Sil
-															</button>
+																<button type="submit" class="btn btn-primary">
+																	Bu Yorumu Sil
+																</button>
 															</form>
 															<!--<a href="#">
 																<i class="far fa-edit"></i>
@@ -255,7 +327,7 @@
 												</div>
 											</div>
 										</div>
-										{{/each}} 
+										{{/each}}
 										<!--<div class="posts-bar">
 											<div class="post-bar bgclr">
 												<div class="wordpressdevlp">
@@ -769,8 +841,8 @@
 													<img src="/images/resources/us-pc2.png" alt="">
 													<div class="usy-name" style="margin-top: 2%;">
 														<h2 style="font-weight: bold;">{{user.username}}</h2>
-														<span><img src="/images/clock.png"
-																alt="">{{ generateDate date 'DD-MM-YYYY' }}</span>
+														<span><img src="/images/clock.png" alt="">{{ generateDate date
+															'DD-MM-YYYY' }}</span>
 													</div>
 												</div>
 												<div class="ed-opts">
@@ -809,20 +881,22 @@
 												<p>{{content}}<br><a href="#" title="">view more</a></p>
 											</div>
 											<div class="job-status-bar">
-											<ul class="like-com">
-												<li>
-													<a id={{ _id }} onclick="actOnPost(event);" data-post-id="{{ _id }}" class="likeText"> Like</a>
-													<img src="images/liked-img.png" alt="">
-													<span style="margin-left:0%" data-toggle="collapse" href="#collapseExample{{_id}}"
-														role="button" aria-expanded="false"
-														aria-controls="collapseExample"
-														id="likes-count-{{ _id }}">{{ like_number }}</span>
-												</li>
-												<li><a href="#" class="com"><i class="fas fa-comment-alt"></i> Comment
-														15</a></li>
-											</ul>
-											<a href="#"><i class="fas fa-eye"></i>Views 50</a>
-										</div>
+												<ul class="like-com">
+													<li>
+														<a id={{ _id }} onclick="actOnPost(event);"
+															data-post-id="{{ _id }}" class="likeText"> Like</a>
+														<img src="images/liked-img.png" alt="">
+														<span style="margin-left:0%" data-toggle="collapse"
+															href="#collapseExample{{_id}}" role="button"
+															aria-expanded="false" aria-controls="collapseExample"
+															id="likes-count-{{ _id }}">{{ like_number }}</span>
+													</li>
+													<li><a href="#" class="com"><i class="fas fa-comment-alt"></i>
+															Comment
+															15</a></li>
+												</ul>
+												<a href="#"><i class="fas fa-eye"></i>Views 50</a>
+											</div>
 										</div>
 										<!--post-bar end-->
 										<div class="comment-section">
@@ -830,26 +904,27 @@
 												<i class="la la-plus"></i>
 											</a> --}}
 											<div class="comment-sec">
-											<ul>
-												<li>
-													{{#each comment}}
-													<div class="comment-list">
-														<div class="bg-img">
-															<img src="images/resources/bg-img1.png" alt="">
-														</div>
-														<div class="comment">
-															<h3>{{username}}</h3>
-															<span><img src="images/clock.png" alt=""> {{ generateDate date 'DD-MM-YYYY' }}</span>
-															<p>{{content}}</p>
-															<!--<a href="#" title="" class="active"><i
+												<ul>
+													<li>
+														{{#each comment}}
+														<div class="comment-list">
+															<div class="bg-img">
+																<img src="images/resources/bg-img1.png" alt="">
+															</div>
+															<div class="comment">
+																<h3>{{username}}</h3>
+																<span><img src="images/clock.png" alt=""> {{
+																	generateDate date 'DD-MM-YYYY' }}</span>
+																<p>{{content}}</p>
+																<!--<a href="#" title="" class="active"><i
                                                                     class="fa fa-times"></i>Yorumu Sil</a>-->
+															</div>
 														</div>
-													</div>
-													<!--comment-list end-->
-													{{/each}}									
-												</li>
-											</ul>
-										</div>
+														<!--comment-list end-->
+														{{/each}}
+													</li>
+												</ul>
+											</div>
 											<!--comment-sec end-->
 											<div class="post-comment">
 												<div class="cm_img">
@@ -857,10 +932,11 @@
 												</div>
 												<div class="comment_box">
 													<form action="/comments/newcomment" method="POST">
-													<input  style="max-width: 74%;" type="text" name="content" placeholder="Post a comment">
-													<input type="text" name="post" value="{{_id}}" hidden>
-													<button type="submit">Gönder</button>
-												</form>
+														<input style="max-width: 74%;" type="text" name="content"
+															placeholder="Post a comment">
+														<input type="text" name="post" value="{{_id}}" hidden>
+														<button type="submit">Gönder</button>
+													</form>
 												</div>
 											</div>
 											<!--post-comment end-->
@@ -2353,5 +2429,40 @@
 				}
 			}
 		);
+	});
+</script>
+<script>
+	function readURL(input) {
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+
+			reader.onload = function (e) {
+				$('#blah2').attr('src', e.target.result);
+			}
+
+			reader.readAsDataURL(input.files[0]); // convert to base64 string
+		}
+	}
+
+	$("#imgInp2").change(function () {
+		readURL(this);
+	});
+</script>
+
+<script>
+	function readURL2(input) {
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+
+			reader.onload = function (e) {
+				$('#blahh').attr('src', e.target.result);
+			}
+
+			reader.readAsDataURL(input.files[0]); // convert to base64 string
+		}
+	}
+
+	$("#imgInpp").change(function () {
+		readURL2(this);
 	});
 </script>
