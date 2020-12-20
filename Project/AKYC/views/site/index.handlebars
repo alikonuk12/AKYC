@@ -9,7 +9,12 @@
 								<div class="user-profile">
 									<div class="username-dt">
 										<div class="usr-pic">
-											<img src="images/resources/user-pic.png" alt="">
+												{{#if user.profile_image}}
+												<img style="max-width: 70%;" src="{{user.profile_image}}" alt="">
+												{{/if}}
+												{{#unless user.profile_image}}
+													<img src="/images/resources/user-pic.png" alt="">
+												{{/unless}}
 										</div>
 									</div>
 									<!--username-dt end-->
@@ -340,11 +345,16 @@
 									<div class="post-bar no-margin">
 										<div class="post_topbar">
 											<div class="usy-dt">
-												<img src="images/resources/us-pc2.png" alt="">
+												{{#if user.profile_image}}
+												<img style="max-width: 7%;" src="{{user.profile_image}}" alt="">
+												{{/if}}
+												{{#unless user.profile_image}}
+												<img src="/images/resources/us-pc2.png" alt="">
+												{{/unless}}
 												<div class="usy-name" style="margin-top: 2%;">
 													<h2 style="font-weight: bold;">{{user.username}}</h2>
-													<span><img src="images/clock.png"
-															alt="">{{ generateDate date 'DD-MM-YYYY' }}</span>
+													<span><img src="images/clock.png" alt="">{{ generateDate date
+														'DD-MM-YYYY' }}</span>
 												</div>
 											</div>
 											<div class="ed-opts">
@@ -376,12 +386,13 @@
 										<div class="job-status-bar">
 											<ul class="like-com">
 												<li>
-													<a id={{ _id }} onclick="actOnPost(event);" data-post-id="{{ _id }}" class="likeText"> Like</a>
+													<a id={{ _id }} onclick="actOnPost(event);" data-post-id="{{ _id }}"
+														class="likeText"> Like</a>
 													<img src="images/liked-img.png" alt="">
 													<span data-toggle="collapse" href="#collapseExample{{_id}}"
 														role="button" aria-expanded="false"
-														aria-controls="collapseExample"
-														id="likes-count-{{ _id }}">{{ like_number }}</span>
+														aria-controls="collapseExample" id="likes-count-{{ _id }}">{{
+														like_number }}</span>
 												</li>
 												<li><a href="#" class="com"><i class="fas fa-comment-alt"></i> Comment
 														15</a></li>
@@ -405,18 +416,19 @@
 													{{#each comment}}
 													<div class="comment-list">
 														<div class="bg-img">
-															<img src="images/resources/bg-img1.png" alt="">
+															<img src="/images/resources/bg-img1.png" alt="">
 														</div>
 														<div class="comment">
 															<h3>{{username}}</h3>
-															<span><img src="images/clock.png" alt=""> {{ generateDate date 'DD-MM-YYYY' }}</span>
+															<span><img src="/images/clock.png" alt=""> {{ generateDate
+																date 'DD-MM-YYYY' }}</span>
 															<p>{{content}}</p>
 															<!--<a href="#" title="" class="active"><i
                                                                     class="fa fa-times"></i>Yorumu Sil</a>-->
 														</div>
 													</div>
 													<!--comment-list end-->
-													{{/each}}									
+													{{/each}}
 												</li>
 											</ul>
 										</div>
@@ -427,7 +439,8 @@
 											</div>
 											<div class="comment_box">
 												<form action="/comments/newcomment" method="POST">
-													<input style="max-width: 74%;" type="text" name="content" placeholder="Yorum ekle">
+													<input style="max-width: 74%;" type="text" name="content"
+														placeholder="Yorum ekle">
 													<input type="text" name="post" value="{{_id}}" hidden>
 													<button type="submit">Gönder</button>
 												</form>

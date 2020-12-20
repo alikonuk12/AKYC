@@ -1,5 +1,10 @@
 <section class="cover-sec">
+	{{#if user.cover_image}}
+	<img src="{{user.cover_image}}" alt="">
+	{{/if}}
+	{{#unless user.cover_image}}
 	<img src="/images/resources/cover-img.jpg" alt="">
+	{{/unless}}
 </section>
 
 
@@ -12,13 +17,19 @@
 						<div class="main-left-sidebar">
 							<div class="user_profile">
 								<div class="user-pro-img">
+									{{#if user.profile_image}}
+									<img src="{{user.profile_image}}" alt="">
+									{{/if}}
+									{{#unless user.profile_image}}
 									<img src="/images/resources/user-pro-img.png" alt="">
+									{{/unless}}
 								</div>
 								<!--user-pro-img end-->
 								<div class="user_pro_status">
 									<ul class="flw-hr">
-										<li><a href="#" title="" class="flww"><i class="la la-plus"></i> Follow</a></li>
-										<li><a href="#" title="" class="hre">Hire</a></li>
+										<li><a style="color: white;" id={{ user._id }} onclick="actOnFollow(event);"
+												data-post-id="{{ user._id }}" class="flww"> Follow</a></li>
+										{{!-- <li><a href="#" title="" class="hre">Hire</a></li> --}}
 									</ul>
 									<ul class="flw-status">
 										<li>
@@ -59,7 +70,7 @@
 								<!--sd-title end-->
 								<div class="suggestions-list">
 									<div class="suggestion-usd">
-										<img src="images/resources/s1.png" alt="">
+										<img src="/images/resources/s1.png" alt="">
 										<div class="sgt-text">
 											<h4>Jessica William</h4>
 											<span>Graphic Designer</span>
@@ -67,7 +78,7 @@
 										<span><i class="la la-plus"></i></span>
 									</div>
 									<div class="suggestion-usd">
-										<img src="images/resources/s2.png" alt="">
+										<img src="/images/resources/s2.png" alt="">
 										<div class="sgt-text">
 											<h4>John Doe</h4>
 											<span>PHP Developer</span>
@@ -75,7 +86,7 @@
 										<span><i class="la la-plus"></i></span>
 									</div>
 									<div class="suggestion-usd">
-										<img src="images/resources/s3.png" alt="">
+										<img src="/images/resources/s3.png" alt="">
 										<div class="sgt-text">
 											<h4>Poonam</h4>
 											<span>Wordpress Developer</span>
@@ -83,7 +94,7 @@
 										<span><i class="la la-plus"></i></span>
 									</div>
 									<div class="suggestion-usd">
-										<img src="images/resources/s4.png" alt="">
+										<img src="/images/resources/s4.png" alt="">
 										<div class="sgt-text">
 											<h4>Bill Gates</h4>
 											<span>C & C++ Developer</span>
@@ -91,7 +102,7 @@
 										<span><i class="la la-plus"></i></span>
 									</div>
 									<div class="suggestion-usd">
-										<img src="images/resources/s5.png" alt="">
+										<img src="/images/resources/s5.png" alt="">
 										<div class="sgt-text">
 											<h4>Jessica William</h4>
 											<span>Graphic Designer</span>
@@ -99,7 +110,7 @@
 										<span><i class="la la-plus"></i></span>
 									</div>
 									<div class="suggestion-usd">
-										<img src="images/resources/s6.png" alt="">
+										<img src="/images/resources/s6.png" alt="">
 										<div class="sgt-text">
 											<h4>John Doe</h4>
 											<span>PHP Developer</span>
@@ -135,19 +146,19 @@
 									<ul>
 										<li data-tab="feed-dd" class="active">
 											<a href="#" title="">
-												<img src="images/ic1.png" alt="">
+												<img src="/images/ic1.png" alt="">
 												<span>Feed</span>
 											</a>
 										</li>
 										<li data-tab="info-dd">
 											<a href="#" title="">
-												<img src="images/ic2.png" alt="">
+												<img src="/images/ic2.png" alt="">
 												<span>Info</span>
 											</a>
 										</li>
 										<li data-tab="portfolio-dd">
 											<a href="#" title="">
-												<img src="images/ic3.png" alt="">
+												<img src="/images/ic3.png" alt="">
 												<span>Portfolio</span>
 											</a>
 										</li>
@@ -165,8 +176,8 @@
 													<img src="/images/resources/us-pc2.png" alt="">
 													<div class="usy-name" style="margin-top: 2%;">
 														<h2 style="font-weight: bold;">{{user.username}}</h2>
-														<span><img src="/images/clock.png"
-																alt="">{{ generateDate date 'DD-MM-YYYY' }}</span>
+														<span><img src="/images/clock.png" alt="">{{ generateDate date
+															'DD-MM-YYYY' }}</span>
 													</div>
 												</div>
 												<div class="ed-opts">
@@ -198,20 +209,22 @@
 												<p>{{content}}<br><a href="#" title="">view more</a></p>
 											</div>
 											<div class="job-status-bar">
-											<ul class="like-com">
-												<li>
-													<a id={{ _id }} onclick="actOnPost(event);" data-post-id="{{ _id }}" class="likeText"> Like</a>
-													<img src="images/liked-img.png" alt="">
-													<span style="margin-left:0%" data-toggle="collapse" href="#collapseExample{{_id}}"
-														role="button" aria-expanded="false"
-														aria-controls="collapseExample"
-														id="likes-count-{{ _id }}">{{ like_number }}</span>
-												</li>
-												<li><a href="#" class="com"><i class="fas fa-comment-alt"></i> Comment
-														15</a></li>
-											</ul>
-											<a href="#"><i class="fas fa-eye"></i>Views 50</a>
-										</div>
+												<ul class="like-com">
+													<li>
+														<a id={{ _id }} onclick="actOnPost(event);"
+															data-post-id="{{ _id }}" class="likeText"> Like</a>
+														<img src="/images/liked-img.png" alt="">
+														<span style="margin-left:0%" data-toggle="collapse"
+															href="#collapseExample{{_id}}" role="button"
+															aria-expanded="false" aria-controls="collapseExample"
+															id="likes-count-{{ _id }}">{{ like_number }}</span>
+													</li>
+													<li><a href="#" class="com"><i class="fas fa-comment-alt"></i>
+															Comment
+															15</a></li>
+												</ul>
+												<a href="#"><i class="fas fa-eye"></i>Views 50</a>
+											</div>
 										</div>
 										<!--post-bar end-->
 										<div class="comment-section">
@@ -219,26 +232,27 @@
 												<i class="la la-plus"></i>
 											</a> --}}
 											<div class="comment-sec">
-											<ul>
-												<li>
-													{{#each comment}}
-													<div class="comment-list">
-														<div class="bg-img">
-															<img src="images/resources/bg-img1.png" alt="">
-														</div>
-														<div class="comment">
-															<h3>{{username}}</h3>
-															<span><img src="images/clock.png" alt=""> {{ generateDate date 'DD-MM-YYYY' }}</span>
-															<p>{{content}}</p>
-															<!--<a href="#" title="" class="active"><i
+												<ul>
+													<li>
+														{{#each comment}}
+														<div class="comment-list">
+															<div class="bg-img">
+																<img src="/images/resources/bg-img1.png" alt="">
+															</div>
+															<div class="comment">
+																<h3>{{username}}</h3>
+																<span><img src="/images/clock.png" alt=""> {{
+																	generateDate date 'DD-MM-YYYY' }}</span>
+																<p>{{content}}</p>
+																<!--<a href="#" title="" class="active"><i
                                                                     class="fa fa-times"></i>Yorumu Sil</a>-->
+															</div>
 														</div>
-													</div>
-													<!--comment-list end-->
-													{{/each}}									
-												</li>
-											</ul>
-										</div>
+														<!--comment-list end-->
+														{{/each}}
+													</li>
+												</ul>
+											</div>
 											<!--comment-sec end-->
 											<div class="post-comment">
 												<div class="cm_img">
@@ -246,10 +260,11 @@
 												</div>
 												<div class="comment_box">
 													<form action="/comments/newcomment" method="POST">
-													<input  style="max-width: 74%;" type="text" name="content" placeholder="Post a comment">
-													<input type="text" name="post" value="{{_id}}" hidden>
-													<button type="submit">Gönder</button>
-												</form>
+														<input style="max-width: 74%;" type="text" name="content"
+															placeholder="Post a comment">
+														<input type="text" name="post" value="{{_id}}" hidden>
+														<button type="submit">Gönder</button>
+													</form>
 												</div>
 											</div>
 											<!--post-comment end-->
@@ -259,7 +274,7 @@
 									<!--posty end-->
 									{{/each}}
 									<!--post-bar end-->
-									
+
 									<div class="process-comm">
 										<div class="spinner">
 											<div class="bounce1"></div>
@@ -339,71 +354,71 @@
 										<div class="row">
 											<div class="col-lg-4 col-md-4 col-sm-6 col-6">
 												<div class="gallery_pt">
-													<img src="images/resources/pf-img1.jpg" alt="">
-													<a href="#" title=""><img src="images/all-out.png" alt=""></a>
+													<img src="/images/resources/pf-img1.jpg" alt="">
+													<a href="#" title=""><img src="/images/all-out.png" alt=""></a>
 												</div>
 												<!--gallery_pt end-->
 											</div>
 											<div class="col-lg-4 col-md-4 col-sm-6 col-6">
 												<div class="gallery_pt">
-													<img src="images/resources/pf-img2.jpg" alt="">
-													<a href="#" title=""><img src="images/all-out.png" alt=""></a>
+													<img src="/images/resources/pf-img2.jpg" alt="">
+													<a href="#" title=""><img src="/images/all-out.png" alt=""></a>
 												</div>
 												<!--gallery_pt end-->
 											</div>
 											<div class="col-lg-4 col-md-4 col-sm-6 col-6">
 												<div class="gallery_pt">
-													<img src="images/resources/pf-img3.jpg" alt="">
-													<a href="#" title=""><img src="images/all-out.png" alt=""></a>
+													<img src="/images/resources/pf-img3.jpg" alt="">
+													<a href="#" title=""><img src="/images/all-out.png" alt=""></a>
 												</div>
 												<!--gallery_pt end-->
 											</div>
 											<div class="col-lg-4 col-md-4 col-sm-6 col-6">
 												<div class="gallery_pt">
-													<img src="images/resources/pf-img4.jpg" alt="">
-													<a href="#" title=""><img src="images/all-out.png" alt=""></a>
+													<img src="/images/resources/pf-img4.jpg" alt="">
+													<a href="#" title=""><img src="/images/all-out.png" alt=""></a>
 												</div>
 												<!--gallery_pt end-->
 											</div>
 											<div class="col-lg-4 col-md-4 col-sm-6 col-6">
 												<div class="gallery_pt">
-													<img src="images/resources/pf-img5.jpg" alt="">
-													<a href="#" title=""><img src="images/all-out.png" alt=""></a>
+													<img src="/images/resources/pf-img5.jpg" alt="">
+													<a href="#" title=""><img src="/images/all-out.png" alt=""></a>
 												</div>
 												<!--gallery_pt end-->
 											</div>
 											<div class="col-lg-4 col-md-4 col-sm-6 col-6">
 												<div class="gallery_pt">
-													<img src="images/resources/pf-img6.jpg" alt="">
-													<a href="#" title=""><img src="images/all-out.png" alt=""></a>
+													<img src="/images/resources/pf-img6.jpg" alt="">
+													<a href="#" title=""><img src="/images/all-out.png" alt=""></a>
 												</div>
 												<!--gallery_pt end-->
 											</div>
 											<div class="col-lg-4 col-md-4 col-sm-6 col-6">
 												<div class="gallery_pt">
-													<img src="images/resources/pf-img7.jpg" alt="">
-													<a href="#" title=""><img src="images/all-out.png" alt=""></a>
+													<img src="/images/resources/pf-img7.jpg" alt="">
+													<a href="#" title=""><img src="/images/all-out.png" alt=""></a>
 												</div>
 												<!--gallery_pt end-->
 											</div>
 											<div class="col-lg-4 col-md-4 col-sm-6 col-6">
 												<div class="gallery_pt">
-													<img src="images/resources/pf-img8.jpg" alt="">
-													<a href="#" title=""><img src="images/all-out.png" alt=""></a>
+													<img src="/images/resources/pf-img8.jpg" alt="">
+													<a href="#" title=""><img src="/images/all-out.png" alt=""></a>
 												</div>
 												<!--gallery_pt end-->
 											</div>
 											<div class="col-lg-4 col-md-4 col-sm-6 col-6">
 												<div class="gallery_pt">
-													<img src="images/resources/pf-img9.jpg" alt="">
-													<a href="#" title=""><img src="images/all-out.png" alt=""></a>
+													<img src="/images/resources/pf-img9.jpg" alt="">
+													<a href="#" title=""><img src="/images/all-out.png" alt=""></a>
 												</div>
 												<!--gallery_pt end-->
 											</div>
 											<div class="col-lg-4 col-md-4 col-sm-6 col-6">
 												<div class="gallery_pt">
-													<img src="images/resources/pf-img10.jpg" alt="">
-													<a href="#" title=""><img src="images/all-out.png" alt=""></a>
+													<img src="/images/resources/pf-img10.jpg" alt="">
+													<a href="#" title=""><img src="/images/all-out.png" alt=""></a>
 												</div>
 												<!--gallery_pt end-->
 											</div>
@@ -425,33 +440,33 @@
 							<div class="widget widget-portfolio">
 								<div class="wd-heady">
 									<h3>Portfolio</h3>
-									<img src="images/photo-icon.png" alt="">
+									<img src="/images/photo-icon.png" alt="">
 								</div>
 								<div class="pf-gallery">
 									<ul>
-										<li><a href="#" title=""><img src="images/resources/pf-gallery1.png" alt=""></a>
+										<li><a href="#" title=""><img src="/images/resources/pf-gallery1.png" alt=""></a>
 										</li>
-										<li><a href="#" title=""><img src="images/resources/pf-gallery2.png" alt=""></a>
+										<li><a href="#" title=""><img src="/images/resources/pf-gallery2.png" alt=""></a>
 										</li>
-										<li><a href="#" title=""><img src="images/resources/pf-gallery3.png" alt=""></a>
+										<li><a href="#" title=""><img src="/images/resources/pf-gallery3.png" alt=""></a>
 										</li>
-										<li><a href="#" title=""><img src="images/resources/pf-gallery4.png" alt=""></a>
+										<li><a href="#" title=""><img src="/images/resources/pf-gallery4.png" alt=""></a>
 										</li>
-										<li><a href="#" title=""><img src="images/resources/pf-gallery5.png" alt=""></a>
+										<li><a href="#" title=""><img src="/images/resources/pf-gallery5.png" alt=""></a>
 										</li>
-										<li><a href="#" title=""><img src="images/resources/pf-gallery6.png" alt=""></a>
+										<li><a href="#" title=""><img src="/images/resources/pf-gallery6.png" alt=""></a>
 										</li>
-										<li><a href="#" title=""><img src="images/resources/pf-gallery7.png" alt=""></a>
+										<li><a href="#" title=""><img src="/images/resources/pf-gallery7.png" alt=""></a>
 										</li>
-										<li><a href="#" title=""><img src="images/resources/pf-gallery8.png" alt=""></a>
+										<li><a href="#" title=""><img src="/images/resources/pf-gallery8.png" alt=""></a>
 										</li>
-										<li><a href="#" title=""><img src="images/resources/pf-gallery9.png" alt=""></a>
+										<li><a href="#" title=""><img src="/images/resources/pf-gallery9.png" alt=""></a>
 										</li>
-										<li><a href="#" title=""><img src="images/resources/pf-gallery10.png"
+										<li><a href="#" title=""><img src="/images/resources/pf-gallery10.png"
 													alt=""></a></li>
-										<li><a href="#" title=""><img src="images/resources/pf-gallery11.png"
+										<li><a href="#" title=""><img src="/images/resources/pf-gallery11.png"
 													alt=""></a></li>
-										<li><a href="#" title=""><img src="images/resources/pf-gallery12.png"
+										<li><a href="#" title=""><img src="/images/resources/pf-gallery12.png"
 													alt=""></a></li>
 									</ul>
 								</div>
@@ -468,6 +483,35 @@
 </main>
 
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+	var updateFollowStats = {
+		Follow: function (postId) {
+			document.querySelector('#likes-count-' + postId).textContent++;
+		},
+		Unfollow: function (postId) {
+			document.querySelector('#likes-count-' + postId).textContent--;
+		}
+	};
+
+	var toggleFollowText = {
+		Follow: function (button) {
+			button.textContent = "Unfollow";
+		},
+		Unfollow: function (button) {
+			button.textContent = "Follow";
+		}
+	};
+
+	var actOnFollow = function (event) {
+		var followId = event.target.dataset.postId;
+		var followstatus = event.target.textContent.trim();
+		toggleFollowText[followstatus](event.target);
+		//updateFollowStats[action](followId);
+		axios.post('/follow/' + followId + '/act', { followstatus: followstatus });
+	};
+</script>
+
+
 <script>
 	var updatePostStats = {
 		Like: function (postId) {
@@ -513,6 +557,28 @@
 						for (let j = 0; j < user_likes.length; j++) {
 							if (like_text[i].id == user_likes[j].post) {
 								like_text[i].innerHTML = 'Unlike';
+								break;
+							}
+						}
+					}
+				},
+				failure: function (response) {
+					console.log(response);
+				}
+			}
+		);
+		$.ajax(
+			{
+				type: 'GET',
+				url: '/follow/follows',
+				contentType: 'application/json',
+				success: function (response) {
+					let user_following = response.data;
+					let follow_text = document.getElementsByClassName('flww');
+					for (let i = 0; i < follow_text.length; i++) {
+						for (let j = 0; j < user_following.length; j++) {
+							if (follow_text[i].id == user_following[j].following) {
+								follow_text[i].innerHTML = 'Unfollow';
 								break;
 							}
 						}

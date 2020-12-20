@@ -838,7 +838,12 @@
 										<div class="post-bar no-margin">
 											<div class="post_topbar">
 												<div class="usy-dt">
-													<img src="/images/resources/us-pc2.png" alt="">
+													{{#if user.profile_image}}
+														<img style="max-width: 7%;" src="{{user.profile_image}}" alt="">
+													{{/if}}
+													{{#unless user.profile_image}}
+														<img src="/images/resources/us-pc2.png" alt="">
+													{{/unless}}
 													<div class="usy-name" style="margin-top: 2%;">
 														<h2 style="font-weight: bold;">{{user.username}}</h2>
 														<span><img src="/images/clock.png" alt="">{{ generateDate date
@@ -909,11 +914,11 @@
 														{{#each comment}}
 														<div class="comment-list">
 															<div class="bg-img">
-																<img src="images/resources/bg-img1.png" alt="">
+																<img src="/images/resources/bg-img1.png" alt="">
 															</div>
 															<div class="comment">
 																<h3>{{username}}</h3>
-																<span><img src="images/clock.png" alt=""> {{
+																<span><img src="/images/clock.png" alt=""> {{
 																	generateDate date 'DD-MM-YYYY' }}</span>
 																<p>{{content}}</p>
 																<!--<a href="#" title="" class="active"><i
