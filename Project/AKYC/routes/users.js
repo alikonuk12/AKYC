@@ -23,10 +23,21 @@ router.post('/sign-in', (req, res) => {
                 req.session.userId = user._id;
                 res.redirect('/');
             } else {
-                res.redirect('sign-in');
+
+                req.session.sessionFlash = {
+                    type: 'alert alert-warning',
+                    message: 'Kullanıcı adı/Şifrenizi doğru girdiğinizden emin olun!'
+                }
+
+                res.redirect('/');
             }
         } else {
-            res.redirect('sign-in');
+            req.session.sessionFlash = {
+                type: 'alert alert-warning',
+                message: 'Kullanıcı adı/Şifrenizi doğru girdiğinizden emin olun!'
+            }
+
+            res.redirect('/');
         }
     });
 });
@@ -41,12 +52,15 @@ router.get('/sign-up', (req, res) => {
 
 router.post('/sign-up', (req, res) => {
     User.create(req.body, (error, user) => {
-        res.redirect('sign-in');
+
+        req.session.sessionFlash = {
+            type: 'alert alert-success',
+            message: 'Başarılı bir şekilde kayıt oldunuz'
+        }
+
+        res.redirect('/');
     });
-    req.session.sessionFlash = {
-        type: 'alert alert-success',
-        message: 'Başarılı bir şekilde kayıt oldunuz'
-    }
+
 });
 
 router.get('/logout', (req, res) => {

@@ -1,16 +1,14 @@
 <div class="sign-in-page">
 	<div class="signin-popup">
-		{{#if sessionFlash.message}}
-		<div class="{{sessionFlash.type}}">{{sessionFlash.message}}</div>
-		{{/if}}
+
 		<div class="signin-pop">
 			<div class="row">
 				<div class="col-lg-6">
 					<div class="cmp-info">
 						<div class="cm-logo">
+							
 							<img src="images/cm-logo.png" alt="">
-							<p>Workwise, is a global freelancing platform and social networking where businesses and
-								independent professionals connect and collaborate remotely</p>
+							<p>Gastronomi ve mutfak sanatı konseptli bir sosyal medya platformu. Düşüncelerinizi rahatça paylaşıp, diğer kullanıcılarla etkileşime girebilirsiniz. Web sitemizin kullanımı herkese açıktır, siteye kaydolmak ve kullanmak tamamen ücretsizdir.</p>
 						</div>
 						<!--cm-logo end-->
 						<img src="images/cm-main-img.png" alt="">
@@ -22,23 +20,22 @@
 						<ul class="sign-control">
 							<!--<li data-tab="tab-1" class="current"><a href="#" title="">Sign in</a></li>-->
 							<li onclick="location.href='/users/sign-up'" data-tab="tab-2"><a href="/users/sign-up"
-									title="">Sign up</a></li>
+									title="">Kayıt Ol</a></li>
 						</ul>
 						<div class="sign_in_sec current" id="tab-1">
-
-							<h3>Sign in</h3>
+							<h3>Giriş yap</h3>
 							<form action="/users/sign-in" method="POST">
 								<div class="row">
 									<div class="col-lg-12 no-pdd">
 										<div class="sn-field">
-											<input type="text" name="username" placeholder="Username" required>
+											<input type="text" name="username" placeholder="Kullanıcı adı" required>
 											<i class="la la-user"></i>
 										</div>
 										<!--sn-field end-->
 									</div>
 									<div class="col-lg-12 no-pdd">
 										<div class="sn-field">
-											<input type="password" name="password" placeholder="Password" required>
+											<input type="password" name="password" placeholder="Şifre" required>
 											<i class="la la-lock"></i>
 										</div>
 									</div>
@@ -49,16 +46,19 @@
 												<label for="c1">
 													<span></span>
 												</label>
-												<small>Remember me</small>
+												<small>Beni Hatırla</small>
 											</div>
 											<!--fgt-sec end-->
-											<a href="#" title="">Forgot Password?</a>
+											<a href="#" title="">Şifremi unuttum</a>
 										</div>
 									</div>
 									<div class="col-lg-12 no-pdd">
-										<button type="submit" value="submit">Sign in</button>
+										<button type="submit" value="submit">Giriş yap</button>
 									</div>
 								</div>
+								{{#if sessionFlash.message}}
+							<div style="margin-top: 1rem" id="div.alert" class="{{sessionFlash.type}}">{{sessionFlash.message}}</div>
+							{{/if}}
 							</form>
 							<div class="login-resources">
 								<h4>Login Via Social Account</h4>
@@ -191,3 +191,9 @@
 		</div>
 		<!--signin-popup end-->
 	</div>
+	<script>	$("document").ready(function () {
+			setTimeout(function () {
+				$("div.alert").remove();
+			}, 5000); // 5 secs
+
+		});</script>

@@ -5,9 +5,11 @@
 				<div class="col-lg-6">
 					<div class="cmp-info">
 						<div class="cm-logo">
+							{{#if sessionFlash.message}}
+							<div id="div.alert" class="{{sessionFlash.type}}">{{sessionFlash.message}}</div>
+							{{/if}}
 							<img src="images/cm-logo.png" alt="">
-							<p>Workwise, is a global freelancing platform and social networking where businesses and
-								independent professionals connect and collaborate remotely</p>
+							<p>Gastronomi ve mutfak sanatı konseptli bir sosyal medya platformu. Düşüncelerinizi rahatça paylaşıp, diğer kullanıcılarla etkileşime girebilirsiniz. Web sitemizin kullanımı herkese açıktır, siteye kaydolmak ve kullanmak tamamen ücretsizdir.</p>
 						</div>
 						<!--cm-logo end-->
 						<img src="images/cm-main-img.png" alt="">
@@ -18,7 +20,7 @@
 					<div class="login-sec">
 						<ul class="sign-control">
 							<li onclick="location.href='/users/sign-in'" data-tab="tab-2"><a href="/users/sign-in"
-									title="">Sign in</a></li>
+									title="">Giriş Yap</a></li>
 							<!--li data-tab="tab-1" class="current"><a href="#" title="">Sign up</a></li>-->
 						</ul>
 						<!--			
@@ -74,24 +76,24 @@
 										</ul>
 									</div><!--signup-tab end-->
 							<div class="dff-tab current" id="tab-1">
-								<form action="/users/sign-up" method="POST">
-									<h3>Sign up</h3>
+								<form action="/users/sign-up" method="POST" >
+									<h3>Kayıt Ol</h3>
 									<div class="row">
 										<div class="col-lg-12 no-pdd">
 											<div class="sn-field">
-												<input type="text" name="username" placeholder="Username *" required>
+												<input type="text" name="username" placeholder="Kullanıcı adı *" required>
 												<i class="la la-user"></i>
 											</div>
 										</div>
 										<div class="col-lg-12 no-pdd">
 											<div class="sn-field">
-												<input type="text" name="name" placeholder="Name *" required>
+												<input type="text" name="name" placeholder="İsim *" required>
 												<i class="la la-user"></i>
 											</div>
 										</div>
 										<div class="col-lg-12 no-pdd">
 											<div class="sn-field">
-												<input type="text" name="surname" placeholder="Surname *" required>
+												<input type="text" name="surname" placeholder="Soyad *" required>
 												<i class="la la-user"></i>
 											</div>
 										</div>
@@ -103,44 +105,43 @@
 										</div>
 										<div class="col-lg-12 no-pdd">
 											<div class="sn-field">
-												<input type="date" name="birthdate" placeholder="Birth Date">
+												<input type="date" name="birthdate" placeholder="Doğum Tarihi">
 												<i class="la la-user"></i>
 											</div>
 										</div>
 										<div class="col-lg-12 no-pdd">
 											<div class="sn-field">
-												<input type="text" name="city" placeholder="City *" required>
+												<input type="text" name="city" placeholder="Şehir *" required>
 												<i class="la la-user"></i>
 											</div>
 										</div>
 										<div class="col-lg-12 no-pdd">
 											<div class="sn-field">
-												<input type="text" name="job" placeholder="Job *" required>
+												<input type="text" name="job" placeholder="İş *" required>
 												<i class="la la-user"></i>
 											</div>
 										</div>
 										<div class="col-lg-12 no-pdd">
 											<div class="sn-field">
-												<input type="password" name="password" placeholder="Password *"
+												<input type="password" name="password" placeholder="Şifre *"
 													required>
 												<i class="la la-lock"></i>
 											</div>
 										</div>
 										<div class="col-lg-12 no-pdd">
 											<div class="checky-sec st2">
-												<div class="fgt-sec">
-													<input type="checkbox" name="cc" id="c2" required>
-													<label for="c2">
+												<div class="fgt-sec my-checkbox-group required">
+													<input type="checkbox" name="cc" id="cterm" required>
+													<label for="cterm">
 														<span></span>
 													</label>
-													<small>Yes, I understand and agree to the workwise Terms &
-														Conditions.</small>
+													<small>Evet, web sitesinin Hüküm & Koşullarını anlıyorum ve kabul ediyorum.</small>
 												</div>
 												<!--fgt-sec end-->
 											</div>
 										</div>
 										<div class="col-lg-12 no-pdd">
-											<button type="submit" value="submit">Get Started</button>
+											<button type="submit" value="submit" onclick="checkTerms()">Kayıt Ol</button>
 										</div>
 									</div>
 								</form>
@@ -203,4 +204,25 @@
 		<!--signin-pop end-->
 	</div>
 	<!--signin-popup end-->
+	<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" style="position: fixed; top: 0; right: 0; min-height: 80px; min-width: 300px; margin-top: 0.75rem;  margin-right: 0.75rem">
+  <div class="toast-header">
+    <strong class="mr-auto">Hüküm ve Koşullar</strong>
+    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="toast-body">
+   Kayıt olmak için web sitesinin Hüküm & Koşullarını kabul etmelisiniz!
+  </div>
 </div>
+</div>	
+<script>
+	function checkTerms(){
+		if(!$('#cterm').prop("checked")){
+			$(".toast").toast({
+            delay: 3000
+        });
+			$('.toast').toast('show');
+		}	
+	}
+</script>
