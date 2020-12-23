@@ -78,6 +78,7 @@ const likepost = require('./routes/likepost');
 const comment = require('./routes/comments');
 const search = require('./routes/search');
 const follow = require('./routes/follow');
+const admin = require('./routes/admin');
 
 app.use('/', main);
 app.use('/users', users);
@@ -86,6 +87,7 @@ app.use('/likepost', likepost);
 app.use('/comments', comment);
 app.use('/search', search);
 app.use('/follow', follow);
+app.use('/admin', admin);
 
 app.listen(port, hostname, () => {
     console.log(`Server çalışıyor, http://${hostname}:${port}/`);

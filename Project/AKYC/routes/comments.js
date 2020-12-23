@@ -22,7 +22,7 @@ router.post('/newcomment', (req, res) => {
 router.post('/:id', (req, res) => {
     if (req.session.userId) {
         Comment.deleteOne({ _id: req.params.id }, () => {});
-        res.redirect('/');
+        res.redirect(req.get('referer'));
     } else {
         res.render('site/sign-in');
     }

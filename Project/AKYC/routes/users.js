@@ -5,11 +5,12 @@ const Post = require('../models/Post');
 const Comment = require('../models/Comment');
 const path = require('path');
 const VerRequest = require('../models/VerRequest');
+//const Admin = require('../models/Admin');
 
 
 router.get('/sign-in', (req, res) => {
     if (!req.session.userId) {
-        res.render('site/sign-in');
+        res.redirect('/');
     } else {
         res.render('site/index');
     }
@@ -21,6 +22,7 @@ router.post('/sign-in', (req, res) => {
         if (user) {
             if (user.password == password) {
                 req.session.userId = user._id;
+                // Admin.create(null, ()=>{});
                 res.redirect('/');
             } else {
 
@@ -51,13 +53,19 @@ router.get('/sign-up', (req, res) => {
 });
 
 router.post('/sign-up', (req, res) => {
-    User.create(req.body, (error, user) => {
+    User.create(req.body).then(user => {
 
         req.session.sessionFlash = {
             type: 'alert alert-success',
             message: 'Başarılı bir şekilde kayıt oldunuz'
         }
 
+        res.redirect('/');
+    }).catch(() => {
+        req.session.sessionFlash = {
+            type: 'alert alert-warning',
+            message: 'Kayıt esnasında hata oluştu. Tekrar deneyiniz.'
+        }
         res.redirect('/');
     });
 
