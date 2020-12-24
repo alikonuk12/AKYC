@@ -14,7 +14,7 @@ router.get('/', function (req, res) {
     Admin.findById(req.session.userId).then(admin => {
         Post.find({ isDeleted: false }).populate({ path: 'user', model: User }).populate({ path: 'comment', model: Comment }).sort({ $natural: -1 }).then(posts => {
             Comment.find({}).sort({ $natural: -1 }).populate({ path: 'user', model: User }).then(comments => {
-                VerRequest.find({}).sort({ $natural: -1 }).populate({ path: 'user', model: User }).then(verreqs => {
+                VerRequest.find({ isProcessed: false }).sort({ $natural: -1 }).populate({ path: 'user', model: User }).then(verreqs => {
                     res.render('site/admin', { admin: admin, posts: posts, comments: comments, verreqs: verreqs });
                 });
             });
@@ -56,5 +56,26 @@ router.get('/logout', (req, res) => {
     });
 });
 
+router.post('/accept/:id', (req, res) => {
+    VerRequest.findById(req.params.id).then(verreq => {
+        User.findById(verreq.user._id).then(user => {
+            user.isVerified = true;
+            user.save();
+        });
+        VerRequest.findById(verreq._id).then(verification => {
+            verification.isProcessed = true;
+            verification.save();
+        });
+        res.redirect('/admin');
+    });
+});
+
+router.post('/decline/:id', (req, res) => {
+        VerRequest.findById(req.params.id).then(verification => {
+            verification.isProcessed = true;
+            verification.save();
+        });
+        res.redirect('/admin');
+});
 
 module.exports = router;

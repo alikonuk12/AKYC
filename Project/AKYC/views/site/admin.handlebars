@@ -7,9 +7,9 @@
 	<img src="{{user.cover_image}}" alt="">
 	{{/if}}
 	{{#unless user.cover_image}}
-	<img src="/images/resources/cover-img.jpg" alt="">
+	<img src="/images/admincover.png" alt="">
 	{{/unless}}
-	
+
 	{{!-- <div class="add-pic-box">
 		<div class="container">
 			<div class="row no-gutters">
@@ -33,7 +33,7 @@
 				<div class="modal-body">
 					<div style="margin-left: 15%; margin-top: 5%;">
 						<div class="col-sm-0.5">
-							<img id="blah2" src="{{user.cover_image}}" alt="Kapak Fotoğrafı" width="50" height="60">
+							<img id="blah2" src="/images/admincover.png" alt="Kapak Fotoğrafı" width="50" height="60">
 						</div>
 						<div class="col-sm-0.5">
 							<input style="margin-top: 3%;" type="file" id="imgInp2" name="cover_image">
@@ -63,7 +63,7 @@
 									<img src="{{user.profile_image}}" alt="">
 									{{/if}}
 									{{#unless user.profile_image}}
-									<img src="/images/resources/user-pro-img.png" alt="">
+									<img src="/images/adminprofile.png" alt="">
 									{{/unless}}
 									<div class="add-dp" id="OpenImgUpload">
 										<label data-toggle="modal" data-target="#profilePhoto"><i
@@ -83,7 +83,7 @@
 												<div class="modal-body">
 													<div style="margin-left: 15%; margin-top: 5%;">
 														<div class="col-sm-0.5">
-															<img id="blahh" src="{{user.profile_image}}"
+															<img id="blahh" src="/images/adminprofile.png"
 																alt="Profil Fotoğrafı" width="60" height="70">
 														</div>
 														<div class="col-sm-0.5">
@@ -224,19 +224,19 @@
 												<span>Gönderiler</span>
 											</a>
 										</li>
-										<li data-tab="info-dd">
+										{{!-- <li data-tab="info-dd">
 											<a href="#" title="">
 												<img src="/images/ic2.png" alt="">
 												<span>Info</span>
 											</a>
-										</li>
+										</li> --}}
 										<li data-tab="saved-jobs">
 											<a href="#" title="">
-												<img src="/images/ic4.png" alt="">
-												<span>Yorumlarım</span>
+												<img src="/images/review.png" alt="">
+												<span>Yorumlar</span>
 											</a>
 										</li>
-										<li data-tab="my-bids">
+										{{!-- <li data-tab="my-bids">
 											<a href="#" title="">
 												<img src="/images/ic5.png" alt="">
 												<span>Bids</span>
@@ -247,11 +247,11 @@
 												<img src="/images/ic3.png" alt="">
 												<span>Portfolio</span>
 											</a>
-										</li>
+										</li> --}}
 										<li data-tab="rewivewdata">
 											<a href="#" title="">
-												<img src="/images/review.png" alt="">
-												<span>Reviews</span>
+												<img src="/images/ic5.png" alt="">
+												<span>Doğrulama Talepleri</span>
 											</a>
 										</li>
 										<!--
@@ -839,10 +839,10 @@
 											<div class="post_topbar">
 												<div class="usy-dt">
 													{{#if user.profile_image}}
-														<img style="max-width: 7%;" src="{{user.profile_image}}" alt="">
+													<img style="max-width: 7%;" src="{{user.profile_image}}" alt="">
 													{{/if}}
 													{{#unless user.profile_image}}
-														<img src="/images/resources/us-pc2.png" alt="">
+													<img src="/images/resources/us-pc2.png" alt="">
 													{{/unless}}
 													<div class="usy-name" style="margin-top: 2%;">
 														<h2 style="font-weight: bold;">{{user.username}}</h2>
@@ -1587,28 +1587,45 @@
 
 								<div class="posts-section">
 									<div class="post-bar reviewtitle">
-										<h2>Reviews</h2>
+										<h2>Doğrulama Talepleri</h2>
 									</div>
 									<!--post-bar end-->
+									{{#each verreqs}}
 									<div class="post-bar ">
 										<div class="post_topbar">
 											<div class="usy-dt">
-												<img src="/images/resources/bg-img3.png" alt="">
 												<div class="usy-name">
-													<h3>Rock William</h3>
+													<div class="usy-dt">
+														<img style="max-width: 7%;" src="{{user.profile_image}}" alt="">
+														<div class="usy-name" style="margin-top: 2%;">
+															<h2 style="font-weight: bold;">{{user.username}}</h2>
+														</div>
+													</div>
 													<div class="epi-sec epi2">
 														<ul class="descp review-lt">
-															<li><img src="/images/icon8.png" alt=""><span>Epic
-																	Coder</span></li>
-															<li><img src="/images/icon9.png" alt=""><span>India</span>
+															<li><img src="/images/icon8.png"
+																	alt=""><span>{{user.job}}</span></li>
+															<li><img src="/images/icon9.png"
+																	alt=""><span>{{user.city}}</span>
 															</li>
 														</ul>
+														<img style="width: 85%;" src="{{idcard_image}}">
+														<div>
+															<form action="/admin/accept/{{_id}}" method="POST">
+																<button type="submit" class="btn btn-success">Kabul
+																	Et</button>
+															</form>
+															<form action="/admin/decline/{{_id}}" method="POST">
+																<button type="submit"
+																	class="btn btn-danger">Reddet</button>
+															</form>
+														</div>
 													</div>
 												</div>
 											</div>
 										</div>
 
-										<div class="job_descp mngdetl">
+										{{!-- <div class="job_descp mngdetl">
 											<div class="star-descp review">
 												<ul>
 													<li><i class="fa fa-star"></i></li>
@@ -1647,10 +1664,11 @@
 												</div>
 											</div>
 
-										</div>
+										</div> --}}
 									</div>
+									{{/each}}
 									<!--post-bar end-->
-									<div class="post-bar post-thanks">
+									{{!-- <div class="post-bar post-thanks">
 										<div class="post_topbar">
 											<div class="usy-dt">
 												<img src="/images/resources/bg-img1.png" alt="">
@@ -1702,7 +1720,7 @@
 												</div>
 											</div>
 										</div>
-									</div>
+									</div> --}}
 									<!--post-bar end-->
 								</div>
 								<!--posts-section end-->
@@ -2180,7 +2198,7 @@
 					<div class="col-lg-3">
 						<div class="right-sidebar">
 							<div class="message-btn">
-								<a href="profile-account-setting.html" title=""><i class="fas fa-cog"></i> Setting</a>
+								<a href="/users/logout" title=""><i class="tc"></i> Logout</a>
 							</div>
 							<div class="widget widget-portfolio">
 								<div class="wd-heady">

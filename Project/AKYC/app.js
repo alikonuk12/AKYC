@@ -12,6 +12,7 @@ const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-ac
 const fileUpload = require('express-fileupload');
 const generateDate = require("./helpers/generateDate").generateDate;
 const online = require("./helpers/equal").equal;
+const isAdmin = require("./helpers/isAdmin").isAdmin;
 
 mongoose.connect('mongodb://127.0.0.1/akyc_db', {
     useNewUrlParser: true,
@@ -39,7 +40,8 @@ const hbs = exphbs.create({
     handlebars: allowInsecurePrototypeAccess(Handlebars),
     helpers: {
         generateDate: generateDate,
-        online: online
+        online: online,
+        isAdmin: isAdmin
     }
 });
 

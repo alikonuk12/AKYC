@@ -16,7 +16,7 @@ const UserSchema = new mongoose.Schema({
     cover_image: { type: String },
     follower: { type: Schema.Types.ObjectId, ref: 'followers' },
     following: { type: Schema.Types.ObjectId, ref: 'followings' },
-    isVerified: { type: Boolean, required: true, default: false }
+    isVerified: { type: Boolean, required: true, default: false },
 });
 
 /* 

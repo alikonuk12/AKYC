@@ -31,6 +31,7 @@
 		{{/unless}}
 		<div class="wrapper">
 			{{#if displayLink}}
+			{{#if (isAdmin user._id) }}
 			<header>
 				<div class="container">
 					<div class="header-data">
@@ -261,6 +262,7 @@
 				</div>
 			</header>
 			<!--header end-->
+			{{/if}}
 			{{/if}}
 
 			{{{body}}}
