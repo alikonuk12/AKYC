@@ -1,8 +1,8 @@
 <section class="cover-sec">
-	{{#if user.cover_image}}
-	<img src="{{user.cover_image}}" alt="">
+	{{#if searchedUser.cover_image}}
+	<img src="{{searchedUser.cover_image}}" alt="">
 	{{/if}}
-	{{#unless user.cover_image}}
+	{{#unless searchedUser.cover_image}}
 	<img src="/images/resources/cover-img.jpg" alt="">
 	{{/unless}}
 </section>
@@ -17,18 +17,18 @@
 						<div class="main-left-sidebar">
 							<div class="user_profile">
 								<div class="user-pro-img">
-									{{#if user.profile_image}}
-									<img src="{{user.profile_image}}" alt="">
+									{{#if searchedUser.profile_image}}
+									<img src="{{searchedUser.profile_image}}" alt="">
 									{{/if}}
-									{{#unless user.profile_image}}
+									{{#unless searchedUser.profile_image}}
 									<img src="/images/resources/user-pro-img.png" alt="">
 									{{/unless}}
 								</div>
 								<!--user-pro-img end-->
 								<div class="user_pro_status">
 									<ul class="flw-hr">
-										<li><a style="color: white;" id={{ user._id }} onclick="actOnFollow(event);"
-												data-post-id="{{ user._id }}" class="flww"> Follow</a></li>
+										<li><a style="color: white;" id={{ searchedUser._id }} onclick="actOnFollow(event);"
+												data-post-id="{{ searchedUser._id }}" class="flww"> Follow</a></li>
 										{{!-- <li><a href="#" title="" class="hre">Hire</a></li> --}}
 									</ul>
 									<ul class="flw-status">
@@ -130,9 +130,11 @@
 					<div class="col-lg-6">
 						<div class="main-ws-sec">
 							<div class="user-tab-sec">
-								<h3>{{user.name}} {{user.surname}}</h3>
+								<h3>{{searchedUser.name}} {{searchedUser.surname}}{{#if searchedUser.isVerified}}<img
+										style="float: right; width: 4%; margin-right: 60%;"
+										src="/images/verificationmark.png" />{{/if}}</h3>
 								<div class="star-descp">
-									<span>{{user.job}}</span>
+									<span>{{searchedUser.job}}</span>
 									<ul>
 										<li><i class="fa fa-star"></i></li>
 										<li><i class="fa fa-star"></i></li>
@@ -172,41 +174,59 @@
 									<div class="posty">
 										<div class="post-bar no-margin">
 											<div class="post_topbar">
-												<div class="usy-dt">
-													<img src="/images/resources/us-pc2.png" alt="">
-													<div class="usy-name" style="margin-top: 2%;">
-														<h2 style="font-weight: bold;">{{user.username}}</h2>
-														<span><img src="/images/clock.png" alt="">{{ generateDate date
-															'DD-MM-YYYY' }}</span>
+												<div class="row">
+													<div class="col-sm-11">
+														<div class="usy-dt">
+															{{#if user.profile_image}}
+															<img style="max-width: 8%; max-height: 8%;"
+																src="{{user.profile_image}}" alt="">
+															{{/if}}
+															{{#unless user.profile_image}}
+															<img src="/images/resources/us-pc2.png" alt="">
+															{{/unless}}
+															<div class="usy-name" style="margin-top: 2%;">
+																<h2 style="font-weight: bold;">{{user.username}}</h2>
+																<span><img src="/images/clock.png" alt="">{{
+																	generateDate date
+																	'DD-MM-YYYY' }}</span>
+															</div>
+															<div class="epi-sec">
+																<ul class="descp">
+																	<li><img src="/images/icon8.png"
+																			alt=""><span>{{user.job}}</span>
+																	</li>
+																	<li><img src="/images/icon9.png"
+																			alt=""><span>{{user.city}}</span>
+																	</li>
+																</ul>
+																{{!-- <ul class="bk-links">
+																	<li><a href="#" title=""><i
+																				class="la la-bookmark"></i></a></li>
+																	<li><a href="#" title=""><i
+																				class="la la-envelope"></i></a></li>
+																</ul> --}}
+															</div>
+														</div>
+														<div class="job_descp">
+															<div class="blog-image"><img src="{{post_image}}"
+																	class="img-fluid" />
+															</div>
+															{{!-- <p>{{content}}<br><a href="#" title="">view more</a></p> --}}
+														</div>
+													</div>
+													<div class="col-sm-1">
+														<div class="ed-opts">
+															<a href="#" title="" class="ed-opts-open"><i
+																	class="la la-ellipsis-v"></i></a>
+															<ul class="ed-options">
+																<li><a href="#" title="">Edit Post</a></li>
+																<li><a href="#" title="">Unsaved</a></li>
+																<li><a href="#" title="">Unbid</a></li>
+																<li><a href="#" title="">Close</a></li>
+															</ul>
+														</div>
 													</div>
 												</div>
-												<div class="ed-opts">
-													<a href="#" title="" class="ed-opts-open"><i
-															class="la la-ellipsis-v"></i></a>
-													<ul class="ed-options">
-														<li><a href="#" title="">Edit Post</a></li>
-														<li><a href="#" title="">Unsaved</a></li>
-														<li><a href="#" title="">Unbid</a></li>
-														<li><a href="#" title="">Close</a></li>
-													</ul>
-												</div>
-											</div>
-											<div class="epi-sec">
-												<ul class="descp">
-													<li><img src="/images/icon8.png" alt=""><span>{{user.job}}</span>
-													</li>
-													<li><img src="/images/icon9.png" alt=""><span>{{user.city}}</span>
-													</li>
-												</ul>
-												<ul class="bk-links">
-													<li><a href="#" title=""><i class="la la-bookmark"></i></a></li>
-													<li><a href="#" title=""><i class="la la-envelope"></i></a></li>
-												</ul>
-											</div>
-											<div class="job_descp">
-												<div class="blog-image"><img src="{{post_image}}" class="img-fluid" />
-												</div>
-												<p>{{content}}<br><a href="#" title="">view more</a></p>
 											</div>
 											<div class="job-status-bar">
 												<ul class="like-com">
@@ -444,23 +464,32 @@
 								</div>
 								<div class="pf-gallery">
 									<ul>
-										<li><a href="#" title=""><img src="/images/resources/pf-gallery1.png" alt=""></a>
+										<li><a href="#" title=""><img src="/images/resources/pf-gallery1.png"
+													alt=""></a>
 										</li>
-										<li><a href="#" title=""><img src="/images/resources/pf-gallery2.png" alt=""></a>
+										<li><a href="#" title=""><img src="/images/resources/pf-gallery2.png"
+													alt=""></a>
 										</li>
-										<li><a href="#" title=""><img src="/images/resources/pf-gallery3.png" alt=""></a>
+										<li><a href="#" title=""><img src="/images/resources/pf-gallery3.png"
+													alt=""></a>
 										</li>
-										<li><a href="#" title=""><img src="/images/resources/pf-gallery4.png" alt=""></a>
+										<li><a href="#" title=""><img src="/images/resources/pf-gallery4.png"
+													alt=""></a>
 										</li>
-										<li><a href="#" title=""><img src="/images/resources/pf-gallery5.png" alt=""></a>
+										<li><a href="#" title=""><img src="/images/resources/pf-gallery5.png"
+													alt=""></a>
 										</li>
-										<li><a href="#" title=""><img src="/images/resources/pf-gallery6.png" alt=""></a>
+										<li><a href="#" title=""><img src="/images/resources/pf-gallery6.png"
+													alt=""></a>
 										</li>
-										<li><a href="#" title=""><img src="/images/resources/pf-gallery7.png" alt=""></a>
+										<li><a href="#" title=""><img src="/images/resources/pf-gallery7.png"
+													alt=""></a>
 										</li>
-										<li><a href="#" title=""><img src="/images/resources/pf-gallery8.png" alt=""></a>
+										<li><a href="#" title=""><img src="/images/resources/pf-gallery8.png"
+													alt=""></a>
 										</li>
-										<li><a href="#" title=""><img src="/images/resources/pf-gallery9.png" alt=""></a>
+										<li><a href="#" title=""><img src="/images/resources/pf-gallery9.png"
+													alt=""></a>
 										</li>
 										<li><a href="#" title=""><img src="/images/resources/pf-gallery10.png"
 													alt=""></a></li>

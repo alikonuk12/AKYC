@@ -110,10 +110,12 @@ router.post('/verificationrequest', (req, res) => {
 });
 
 router.get('/profile/:id', (req, res) => {
-    User.findById(req.params.id).then(user => {
-        Post.find({ user: user._id, isDeleted: false }).populate({ path: 'user', model: User }).populate({ path: 'comment', model: Comment }).sort({ $natural: -1 }).then(posts => {
+    User.findById(req.params.id).then(searchedUser => {
+        Post.find({ user: searchedUser._id, isDeleted: false }).populate({ path: 'user', model: User }).populate({ path: 'comment', model: Comment }).sort({ $natural: -1 }).then(posts => {
             Comment.find({ user: req.session.userId }).sort({ $natural: -1 }).then(comments => {
-                res.render('site/user-profile', { user: user, posts: posts, comments: comments });
+                User.findById(req.session.userId).then(user => {
+                    res.render('site/user-profile', { searchedUser: searchedUser, posts: posts, comments: comments, user: user });
+                });
             });
         });
     });

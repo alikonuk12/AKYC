@@ -9,7 +9,7 @@
 	{{#unless user.cover_image}}
 	<img src="/images/resources/cover-img.jpg" alt="">
 	{{/unless}}
-	
+
 	<div class="add-pic-box">
 		<div class="container">
 			<div class="row no-gutters">
@@ -203,7 +203,10 @@
 					<div class="col-lg-6">
 						<div class="main-ws-sec">
 							<div class="user-tab-sec rewivew">
-								<h3>{{user.name}} {{user.surname}}</h3>
+								<h3>{{user.name}} {{user.surname}}{{#if user.isVerified}}<img
+										style="float: right; width: 4%; margin-right: 60%;"
+										src="/images/verificationmark.png" />{{/if}}</h3>
+
 								<div class="star-descp">
 									<span>{{user.job}}</span>
 									<ul>
@@ -837,54 +840,71 @@
 									<div class="posty">
 										<div class="post-bar no-margin">
 											<div class="post_topbar">
-												<div class="usy-dt">
-													{{#if user.profile_image}}
-														<img style="max-width: 7%;" src="{{user.profile_image}}" alt="">
-													{{/if}}
-													{{#unless user.profile_image}}
-														<img src="/images/resources/us-pc2.png" alt="">
-													{{/unless}}
-													<div class="usy-name" style="margin-top: 2%;">
-														<h2 style="font-weight: bold;">{{user.username}}</h2>
-														<span><img src="/images/clock.png" alt="">{{ generateDate date
-															'DD-MM-YYYY' }}</span>
+												<div class="row">
+													<div class="col-sm-11">
+														<div class="usy-dt">
+															{{#if user.profile_image}}
+															<img style="max-width: 8%; max-height: 8%;"
+																src="{{user.profile_image}}" alt="">
+															{{/if}}
+															{{#unless user.profile_image}}
+															<img src="/images/resources/us-pc2.png" alt="">
+															{{/unless}}
+															<div class="usy-name" style="margin-top: 2%;">
+																<h2 style="font-weight: bold;">{{user.username}}</h2>
+																<span><img src="/images/clock.png" alt="">{{
+																	generateDate date
+																	'DD-MM-YYYY' }}</span>
+															</div>
+															<div class="epi-sec">
+																<ul class="descp">
+																	<li><img src="/images/icon8.png"
+																			alt=""><span>{{user.job}}</span>
+																	</li>
+																	<li><img src="/images/icon9.png"
+																			alt=""><span>{{user.city}}</span>
+																	</li>
+																</ul>
+																{{!-- <ul class="bk-links">
+																	<li><a href="#" title=""><i
+																				class="la la-bookmark"></i></a></li>
+																	<li><a href="#" title=""><i
+																				class="la la-envelope"></i></a></li>
+																</ul> --}}
+															</div>
+														</div>
+														<div class="job_descp">
+															<div class="blog-image"><img src="{{post_image}}"
+																	class="img-fluid" />
+															</div>
+															<p>{{content}}</p>
+														</div>
+													</div>
+													<div class="col-sm-1">
+														<div class="ed-opts">
+															<a href="#" title="" class="ed-opts-open"><i
+																	class="la la-ellipsis-v"></i></a>
+															<ul class="ed-options">
+																<li><a href="#" title="">Edit Post</a></li>
+																<li><a href="#" title="">Unsaved</a></li>
+																<li><a href="#" title="">Unbid</a></li>
+																<li><a href="#" title="">Close</a></li>
+																<li>
+																	<form action="/posts/{{_id}}" method="POST">
+																		<button
+																			style="color: #686868; background-color: white; font-size: 14px; font-weight: 600; border:#686868"
+																			type="submit">Sil</button>
+																	</form>
+																</li>
+															</ul>
+														</div>
 													</div>
 												</div>
-												<div class="ed-opts">
-													<a href="#" title="" class="ed-opts-open"><i
-															class="la la-ellipsis-v"></i></a>
-													<ul class="ed-options">
-														<li><a href="#" title="">Edit Post</a></li>
-														<li><a href="#" title="">Unsaved</a></li>
-														<li><a href="#" title="">Unbid</a></li>
-														<li><a href="#" title="">Close</a></li>
-														<li>
-															<form action="/posts/{{_id}}" method="POST">
-																<button
-																	style="color: #686868; background-color: white; font-size: 14px; font-weight: 600; border:#686868"
-																	type="submit">Delete</button>
-															</form>
-														</li>
-													</ul>
-												</div>
+
+
 											</div>
-											<div class="epi-sec">
-												<ul class="descp">
-													<li><img src="/images/icon8.png" alt=""><span>{{user.job}}</span>
-													</li>
-													<li><img src="/images/icon9.png" alt=""><span>{{user.city}}</span>
-													</li>
-												</ul>
-												<ul class="bk-links">
-													<li><a href="#" title=""><i class="la la-bookmark"></i></a></li>
-													<li><a href="#" title=""><i class="la la-envelope"></i></a></li>
-												</ul>
-											</div>
-											<div class="job_descp">
-												<div class="blog-image"><img src="{{post_image}}" class="img-fluid" />
-												</div>
-												<p>{{content}}<br><a href="#" title="">view more</a></p>
-											</div>
+
+
 											<div class="job-status-bar">
 												<ul class="like-com">
 													<li>
@@ -2180,7 +2200,7 @@
 					<div class="col-lg-3">
 						<div class="right-sidebar">
 							<div class="message-btn">
-								<a href="profile-account-setting.html" title=""><i class="fas fa-cog"></i> Setting</a>
+								<a href="/profile-account-setting" title=""><i class="fas fa-cog"></i> Ayarlar</a>
 							</div>
 							<div class="widget widget-portfolio">
 								<div class="wd-heady">

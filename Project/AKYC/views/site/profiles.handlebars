@@ -17,6 +17,7 @@
 							<img src="/images/resources/pf-icon1.png" alt="">
 							{{/unless}}
 							<h3>{{ username }}</h3>
+							{{#if isVerified}}<img style="height: 8%; width: 8%;" src="/images/verificationmark.png"/>{{/if}}
 							<h4>{{ city }}</h4>
 							<ul>
 								<li><a style="color: white;" id={{ _id }} onclick="actOnFollow(event);" data-post-id="{{ _id }}"
