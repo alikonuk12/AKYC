@@ -10,8 +10,10 @@ router.get('/', function (req, res) {
         Post.find({ isDeleted: false }).populate({ path: 'user', model: User }).populate({ path: 'likes', model: Like }).populate({ path: 'comment', model: Comment }).sort({ $natural: -1 }).then(posts => {
             User.findById({ _id: req.session.userId }).then(user => {
                 Like.find({}).populate({ path: 'user', model: User }).then(like => {
-                    res.render('site/index', { posts: posts, user: user, like: like });
+                    User.find({  _id : { $ne: req.session.userId } }).sort({_id:-1}).limit(5).then(users => {
+                     res.render('site/index', { posts: posts, user: user, like: like, users: users });
                 });
+            });
             });
         });
     } else {
