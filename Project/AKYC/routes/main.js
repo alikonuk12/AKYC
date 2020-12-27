@@ -10,10 +10,56 @@ router.get('/', function (req, res) {
         Post.find({ isDeleted: false }).populate({ path: 'user', model: User }).populate({ path: 'likes', model: Like }).populate({ path: 'comment', model: Comment }).sort({ $natural: -1 }).then(posts => {
             User.findById({ _id: req.session.userId }).then(user => {
                 Like.find({}).populate({ path: 'user', model: User }).then(like => {
-                    User.find({  _id : { $ne: req.session.userId } }).sort({_id:-1}).limit(5).then(users => {
-                     res.render('site/index', { posts: posts, user: user, like: like, users: users });
+                    User.find({ _id: { $ne: req.session.userId } }).sort({ _id: -1 }).limit(5).then(users => {
+                        User.aggregate([
+                            {
+                                $lookup: {
+                                    from: 'followings',
+                                    localField: '_id',
+                                    foreignField: 'userId',
+                                    as: 'followings'
+                                }
+                            },
+                            {
+                                $project: {
+                                    _id: 1,
+                                    num_of_following: { $size: '$followings' }
+                                }
+                            }
+                        ]).then((num_of_following) => {
+                            User.aggregate([
+                                {
+                                    $lookup: {
+                                        from: 'followers',
+                                        localField: '_id',
+                                        foreignField: 'userId',
+                                        as: 'followers'
+                                    }
+                                },
+                                {
+                                    $project: {
+                                        _id: 1,
+                                        num_of_follower: { $size: '$followers' }
+                                    }
+                                }
+                            ]).then(num_of_follower => {
+                                const following_result = num_of_following.filter(followingnum => {
+                                    if (followingnum._id == req.session.userId) {
+                                        return followingnum;
+                                    }
+                                });
+                                const follower_result = num_of_follower.filter(followernum => {
+                                    if (followernum._id == req.session.userId) {
+                                        return followernum;
+                                    }
+                                });
+                                const following_num = following_result[0].num_of_following;
+                                const follower_num = follower_result[0].num_of_follower;
+                                res.render('site/index', { posts: posts, user: user, like: like, users: users, following_num: following_num, follower_num: follower_num });
+                            });
+                        });
+                    });
                 });
-            });
             });
         });
     } else {

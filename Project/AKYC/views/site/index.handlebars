@@ -26,12 +26,12 @@
 								<!--user-profile end-->
 								<ul class="user-fw-status">
 									<li>
-										<h4>Following</h4>
-										<span>34</span>
+										<h4>Takip edilen</h4>
+										<span>{{following_num}}</span>
 									</li>
 									<li>
-										<h4>Followers</h4>
-										<span>155</span>
+										<h4>Takipçiler</h4>
+										<span>{{follower_num}}</span>
 									</li>
 									<li>
 										<a href="/users/{{user._id}}" title="">View Profile</a>
@@ -203,11 +203,11 @@
 										{{#each users}}
 										<div class="user-profy">
 											{{#if profile_image}}
-											<img style="max-width: 20%; max-height: 20%;" src="{{profile_image}}"
+											<img style="width: 60px; height: 60px;" src="{{profile_image}}"
 												alt="">
 											{{/if}}
 											{{#unless profile_image}}
-											<img src="/images/resources/us-pc2.png" alt="">
+											<img style="width: 60px; height: 60px;" src="/images/resources/us-pc2.png" alt="">
 											{{/unless}}
 											<h3>{{username}}</h3>
 											<span>{{job}}</span>

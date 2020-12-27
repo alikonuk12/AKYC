@@ -5,6 +5,8 @@ const Post = require('../models/Post');
 const Comment = require('../models/Comment');
 const path = require('path');
 const VerRequest = require('../models/VerRequest');
+const Following = require('../models/Following');
+const Follower = require('../models/Follower');
 //const Admin = require('../models/Admin');
 
 
@@ -81,7 +83,53 @@ router.get('/:id', (req, res) => {
     User.findById(req.session.userId).then(user => {
         Post.find({ user: user._id, isDeleted: false }).populate({ path: 'user', model: User }).populate({ path: 'comment', model: Comment }).sort({ $natural: -1 }).then(posts => {
             Comment.find({ user: req.session.userId }).sort({ $natural: -1 }).populate({ path: 'user', model: User }).then(comments => {
-                res.render('site/my-profile', { user: user, posts: posts, comments: comments });
+                User.aggregate([
+                    {
+                        $lookup: {
+                            from: 'followings',
+                            localField: '_id',
+                            foreignField: 'userId',
+                            as: 'followings'
+                        }
+                    },
+                    {
+                        $project: {
+                            _id: 1,
+                            num_of_following: { $size: '$followings' }
+                        }
+                    }
+                ]).then((num_of_following) => {
+                    User.aggregate([
+                        {
+                            $lookup: {
+                                from: 'followers',
+                                localField: '_id',
+                                foreignField: 'userId',
+                                as: 'followers'
+                            }
+                        },
+                        {
+                            $project: {
+                                _id: 1,
+                                num_of_follower: { $size: '$followers' }
+                            }
+                        }
+                    ]).then(num_of_follower => {
+                        const following_result = num_of_following.filter(followingnum => {
+                            if (followingnum._id == req.session.userId) {
+                                return followingnum;
+                            }
+                        });
+                        const follower_result = num_of_follower.filter(followernum => {
+                            if (followernum._id == req.session.userId) {
+                                return followernum;
+                            }
+                        });
+                        const following_num = following_result[0].num_of_following;
+                        const follower_num = follower_result[0].num_of_follower;
+                        res.render('site/my-profile', { user: user, posts: posts, comments: comments, following_num: following_num, follower_num: follower_num });
+                    });
+                });
             });
         });
     });
@@ -114,7 +162,53 @@ router.get('/profile/:id', (req, res) => {
         Post.find({ user: searchedUser._id, isDeleted: false }).populate({ path: 'user', model: User }).populate({ path: 'comment', model: Comment }).sort({ $natural: -1 }).then(posts => {
             Comment.find({ user: req.session.userId }).sort({ $natural: -1 }).then(comments => {
                 User.findById(req.session.userId).then(user => {
-                    res.render('site/user-profile', { searchedUser: searchedUser, posts: posts, comments: comments, user: user });
+                    User.aggregate([
+                        {
+                            $lookup: {
+                                from: 'followings',
+                                localField: '_id',
+                                foreignField: 'userId',
+                                as: 'followings'
+                            }
+                        },
+                        {
+                            $project: {
+                                _id: 1,
+                                num_of_following: { $size: '$followings' }
+                            }
+                        }
+                    ]).then((num_of_following) => {
+                        User.aggregate([
+                            {
+                                $lookup: {
+                                    from: 'followers',
+                                    localField: '_id',
+                                    foreignField: 'userId',
+                                    as: 'followers'
+                                }
+                            },
+                            {
+                                $project: {
+                                    _id: 1,
+                                    num_of_follower: { $size: '$followers' }
+                                }
+                            }
+                        ]).then(num_of_follower => {
+                            const following_result = num_of_following.filter(followingnum => {
+                                if (followingnum._id == req.params.id) {
+                                    return followingnum;
+                                }
+                            });
+                            const follower_result = num_of_follower.filter(followernum => {
+                                if (followernum._id == req.params.id) {
+                                    return followernum;
+                                }
+                            });
+                            const following_num = following_result[0].num_of_following;
+                            const follower_num = follower_result[0].num_of_follower;
+                            res.render('site/user-profile', { searchedUser: searchedUser, posts: posts, comments: comments, user: user, following_num: following_num, follower_num: follower_num });
+                        });
+                    });
                 });
             });
         });
