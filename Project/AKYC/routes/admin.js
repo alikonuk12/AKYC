@@ -10,15 +10,23 @@ router.get('/sign-in', function (req, res) {
     res.render('site/sign-in-admin');
 });
 
+
+
 router.get('/', function (req, res) {
     Admin.findById(req.session.userId).then(admin => {
-        Post.find({ isDeleted: false }).populate({ path: 'user', model: User }).populate({ path: 'comment', model: Comment }).sort({ $natural: -1 }).then(posts => {
-            Comment.find({}).sort({ $natural: -1 }).populate({ path: 'user', model: User }).then(comments => {
-                VerRequest.find({ isProcessed: false }).sort({ $natural: -1 }).populate({ path: 'user', model: User }).then(verreqs => {
-                    res.render('site/admin', { admin: admin, posts: posts, comments: comments, verreqs: verreqs });
+        if (admin) {
+            Post.find({ isDeleted: false }).populate({ path: 'user', model: User }).populate({ path: 'comment', model: Comment }).sort({ $natural: -1 }).then(posts => {
+                Comment.find({}).sort({ $natural: -1 }).populate({ path: 'user', model: User }).then(comments => {
+                    VerRequest.find({ isProcessed: false }).sort({ $natural: -1 }).populate({ path: 'user', model: User }).then(verreqs => {
+                        res.render('site/admin', { admin: admin, posts: posts, comments: comments, verreqs: verreqs });
+                    });
                 });
             });
-        });
+        }
+        else {
+            res.redirect('/');
+        }
+
     });
 });
 
@@ -71,11 +79,11 @@ router.post('/accept/:id', (req, res) => {
 });
 
 router.post('/decline/:id', (req, res) => {
-        VerRequest.findById(req.params.id).then(verification => {
-            verification.isProcessed = true;
-            verification.save();
-        });
-        res.redirect('/admin');
+    VerRequest.findById(req.params.id).then(verification => {
+        verification.isProcessed = true;
+        verification.save();
+    });
+    res.redirect('/admin');
 });
 
 module.exports = router;
