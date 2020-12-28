@@ -1,6 +1,10 @@
 <section class="profile-account-setting">
 	<div class="container">
 		<div class="account-tabs-setting">
+			{{#if sessionFlash.message}}
+			<div style="margin-top: 1rem" id="div.alert" class="{{sessionFlash.type}}">
+				{{sessionFlash.message}}</div>
+			{{/if}}
 			<div class="row">
 				<div class="col-lg-3">
 					<div class="acc-leftbar">
@@ -13,7 +17,7 @@
 									class="fa fa-line-chart"></i>Kullanıcı Bilgileri</a>
 							<a class="nav-item nav-link" id="nav-password-tab" data-toggle="tab" href="#nav-password"
 								role="tab" aria-controls="nav-password" aria-selected="false"><i
-									class="fa fa-lock"></i>Change Password</a>
+									class="fa fa-lock"></i>Şifre Değiştirme</a>
 							<a class="nav-item nav-link" id="nav-notification-tab" data-toggle="tab"
 								href="#nav-notification" role="tab" aria-controls="nav-notification"
 								aria-selected="false"><i class="fa fa-flash"></i>Notifications</a>
@@ -141,36 +145,37 @@
 						</div>
 						<div class="tab-pane fade" id="nav-password" role="tabpanel" aria-labelledby="nav-password-tab">
 							<div class="acc-setting">
-								<h3>Account Setting</h3>
-								<form>
+								<h3>Şifre Değiştirme</h3>
+								<form action="/users/changepassword" method="POST">
 									<div class="cp-field">
-										<h5>Old Password</h5>
+										<h5>Eski Şifre</h5>
 										<div class="cpp-fiel">
-											<input type="text" name="old-password" placeholder="Old Password">
+											<input type="password" name="old" placeholder="Eski şifrenizi giriniz.">
 											<i class="fa fa-lock"></i>
 										</div>
 									</div>
 									<div class="cp-field">
-										<h5>New Password</h5>
+										<h5>Yeni Şifre</h5>
 										<div class="cpp-fiel">
-											<input type="text" name="new-password" placeholder="New Password">
+											<input type="password" name="new" placeholder="Yeni şifrenizi giriniz.">
 											<i class="fa fa-lock"></i>
 										</div>
 									</div>
 									<div class="cp-field">
-										<h5>Repeat Password</h5>
+										<h5>Yeni Şifre (tekrar)</h5>
 										<div class="cpp-fiel">
-											<input type="text" name="repeat-password" placeholder="Repeat Password">
+											<input type="password" name="repeat"
+												placeholder="Yeni şifrenizi tekrar giriniz.">
 											<i class="fa fa-lock"></i>
 										</div>
 									</div>
-									<div class="cp-field">
+									{{!-- <div class="cp-field">
 										<h5><a href="#" title="">Forgot Password?</a></h5>
-									</div>
+									</div> --}}
 									<div class="save-stngs pd2">
 										<ul>
-											<li><button type="submit">Save Setting</button></li>
-											<li><button type="submit">Restore Setting</button></li>
+											<li><button type="submit">Kaydet</button></li>
+											{{!-- <li><button type="submit">Restore Setting</button></li> --}}
 										</ul>
 									</div>
 									<!--save-stngs end-->
@@ -860,3 +865,12 @@
 		<!--account-tabs-setting end-->
 	</div>
 </section>
+
+<script>
+	$("document").ready(function () {
+		setTimeout(function () {
+			$("div.alert").remove();
+		}, 5000); // 5 secs
+
+	});
+</script>

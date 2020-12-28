@@ -9,6 +9,18 @@ const Following = require('../models/Following');
 const Follower = require('../models/Follower');
 //const Admin = require('../models/Admin');
 
+const bcrypt = require('bcrypt');
+const saltRounds = 12;
+const txtprefix = "prefix";
+
+function hashStrSync(txtSaf) {
+    return bcrypt.hashSync(`${txtprefix}${txtSaf}`, saltRounds);
+}
+
+function compareStrSync(txtSaf, txtHashli) {
+    return bcrypt.compareSync(`${txtprefix}${txtSaf}`, txtHashli);
+}
+
 
 router.get('/sign-in', (req, res) => {
     if (!req.session.userId) {
@@ -22,7 +34,7 @@ router.post('/sign-in', (req, res) => {
     const { username, password } = req.body;
     User.findOne({ username }, (error, user) => {
         if (user) {
-            if (user.password == password) {
+            if (compareStrSync(password, user.password)) {
                 req.session.userId = user._id;
                 // Admin.create(null, ()=>{});
                 res.redirect('/');
@@ -55,7 +67,17 @@ router.get('/sign-up', (req, res) => {
 });
 
 router.post('/sign-up', (req, res) => {
-    User.create(req.body).then(user => {
+
+    const username = req.body.username;
+    const name = req.body.name;
+    const surname = req.body.surname;
+    const email = req.body.email;
+    const birthdate = req.body.birthdate;
+    const city = req.body.city;
+    const job = req.body.job;
+    const password = hashStrSync(req.body.password);
+
+    User.create({ username: username, name: name, surname: surname, email: email, birthdate: birthdate, city: city, job: job, password: password }).then(user => {
 
         req.session.sessionFlash = {
             type: 'alert alert-success',
@@ -232,6 +254,36 @@ router.post('/changecoverphoto', (req, res) => {
         user.cover_image = `/images/coverimage/${coverimage.name}`;
         user.save();
         res.redirect(req.get('referer'));
+    });
+});
+
+router.post('/changepassword', (req, res) => {
+    const old_password = req.body.old;
+    const new_password = req.body.new;
+    const repeat_password = req.body.repeat;
+    const hash_new = hashStrSync(req.body.new);
+    const hash_old = hashStrSync(req.body.old);
+
+    User.findById(req.session.userId).then(user => {
+        if (compareStrSync(old_password, user.password)) {
+            if (new_password == repeat_password) {
+                user.password = hash_new;
+                user.save();
+                res.redirect("/");
+            } else{
+                req.session.sessionFlash = {
+                    type: 'alert alert-warning',
+                    message: 'Yeni girilen şifreler birbiriyle uyuşmuyor!'
+                }
+                res.redirect(req.get('referer'));
+            }
+        } else{
+            req.session.sessionFlash = {
+                type: 'alert alert-warning',
+                message: 'Eski şifreniz doğru değil!'
+            }
+            res.redirect(req.get('referer'));
+        }
     });
 });
 
