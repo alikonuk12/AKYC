@@ -36,15 +36,12 @@ router.post('/sign-in', function (req, res) {
         if (admin) {
             if (admin.password == password) {
                 req.session.userId = admin._id;
-                console.log(req.session.userId);
                 res.redirect('/admin');
             } else {
-
                 req.session.sessionFlash = {
                     type: 'alert alert-warning',
                     message: 'Kullanıcı adı/Şifrenizi doğru girdiğinizden emin olun!'
                 }
-
                 res.render('site/sign-in-admin');
             }
         } else {

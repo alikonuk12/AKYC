@@ -7,7 +7,7 @@ const path = require('path');
 const VerRequest = require('../models/VerRequest');
 const Following = require('../models/Following');
 const Follower = require('../models/Follower');
-//const Admin = require('../models/Admin');
+// const Admin = require('../models/Admin');
 
 const bcrypt = require('bcrypt');
 const saltRounds = 12;
@@ -23,6 +23,8 @@ function compareStrSync(txtSaf, txtHashli) {
 
 
 router.get('/sign-in', (req, res) => {
+    // const admin_password = hashStrSync("akyc2020");
+    // Admin.create({ password: admin_password }, () => {});
     if (!req.session.userId) {
         res.redirect('/');
     } else {
@@ -36,7 +38,6 @@ router.post('/sign-in', (req, res) => {
         if (user) {
             if (compareStrSync(password, user.password)) {
                 req.session.userId = user._id;
-                // Admin.create(null, ()=>{});
                 res.redirect('/');
             } else {
 
@@ -270,14 +271,14 @@ router.post('/changepassword', (req, res) => {
                 user.password = hash_new;
                 user.save();
                 res.redirect("/");
-            } else{
+            } else {
                 req.session.sessionFlash = {
                     type: 'alert alert-warning',
                     message: 'Yeni girilen şifreler birbiriyle uyuşmuyor!'
                 }
                 res.redirect(req.get('referer'));
             }
-        } else{
+        } else {
             req.session.sessionFlash = {
                 type: 'alert alert-warning',
                 message: 'Eski şifreniz doğru değil!'
