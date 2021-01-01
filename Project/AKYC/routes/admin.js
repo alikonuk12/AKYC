@@ -6,8 +6,25 @@ const Comment = require('../models/Comment');
 const User = require('../models/User');
 const VerRequest = require('../models/VerRequest');
 
+const bcrypt = require('bcrypt');
+const saltRounds = 12;
+const txtprefix = "prefix";
+
+function hashStrSync(txtSaf) {
+    return bcrypt.hashSync(`${txtprefix}${txtSaf}`, saltRounds);
+}
+
+function compareStrSync(txtSaf, txtHashli) {
+    return bcrypt.compareSync(`${txtprefix}${txtSaf}`, txtHashli);
+}
+
 router.get('/sign-in', function (req, res) {
-    res.render('site/sign-in-admin');
+    if(req.session.userId){
+        res.redirect('/');
+    }else {
+        res.render('site/sign-in-admin');
+    }
+    
 });
 
 
@@ -34,7 +51,7 @@ router.post('/sign-in', function (req, res) {
     const { username, password } = req.body;
     Admin.findOne({ username }, (error, admin) => {
         if (admin) {
-            if (admin.password == password) {
+            if (compareStrSync(password, admin.password)) {
                 req.session.userId = admin._id;
                 res.redirect('/admin');
             } else {

@@ -7,7 +7,7 @@ const path = require('path');
 const VerRequest = require('../models/VerRequest');
 const Following = require('../models/Following');
 const Follower = require('../models/Follower');
-// const Admin = require('../models/Admin');
+ //const Admin = require('../models/Admin');
 
 const bcrypt = require('bcrypt');
 const saltRounds = 12;
@@ -23,8 +23,8 @@ function compareStrSync(txtSaf, txtHashli) {
 
 
 router.get('/sign-in', (req, res) => {
-    // const admin_password = hashStrSync("akyc2020");
-    // Admin.create({ password: admin_password }, () => {});
+    /*  const admin_password = hashStrSync("akyc2020");
+     Admin.create({ password: admin_password }, () => {}); */
     if (!req.session.userId) {
         res.redirect('/');
     } else {
