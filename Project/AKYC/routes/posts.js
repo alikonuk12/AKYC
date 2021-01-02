@@ -4,6 +4,7 @@ const Post = require('../models/Post');
 const path = require('path');
 const User = require('../models/User');
 const Like = require('../models/Like');
+const Comment = require('../models/Comment');
 const mongoose = require('mongoose');
 
 //CREATE POST
@@ -32,6 +33,11 @@ router.post('/:id', (req, res) => {
             post.isDeleted = true;
             post.save().then(() => {
                 res.redirect(req.get('referer'));
+            });
+            Comment.find({ post: req.params.id }).then(comment => {
+                for (let i = 0; i < comment.length; i++) {
+                    Comment.deleteOne({ _id: comment[i]._id }, () => { });
+                }
             });
         });
     } else {

@@ -7,7 +7,7 @@ const PostSchema = new mongoose.Schema({
     date: { type: Date, default: Date.now },
     post_image: { type: String },
     like_number: { type: Number, default: 0 },
-    commentNumber: { type: Number, default: 0 },
+    comment_number: { type: Number, default: 0 },
     isDeleted: { type: Boolean, required: true, default: false },
     comment: [{ type: Schema.Types.ObjectId, ref: 'comments' }]
 });
