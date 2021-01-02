@@ -56,17 +56,26 @@ router.get('/', function (req, res) {
                                 });
                                 const following_num = following_result[0].num_of_following;
                                 const follower_num = follower_result[0].num_of_follower;
-                                Following.find({ userId: req.session.userId }).then(following => {
-                                    const following_posts = [];
-                                    for(let i = 0; i < posts.length; i++){
-                                        for(let j = 0; j < following.length; j++){
-                                            if(posts[i].user.id == following[j].following){
-                                                following_posts.push(posts[i]);
-                                            }
-                                        }   
-                                    }
-                                    res.render('site/index', { posts: following_posts, user: user, like: like, users: users, following_num: following_num, follower_num: follower_num });
-                                });
+
+                                if(following_num > 0){
+                                    Following.find({ userId: req.session.userId }).then(following => {
+                                        const following_posts = [];
+                                        for(let i = 0; i < posts.length; i++){
+                                            for(let j = 0; j < following.length; j++){
+                                                if(posts[i].user.id == following[j].following || posts[i].user.id == req.session.userId ){
+                                                    following_posts.push(posts[i]);
+                                                }
+                                            }   
+                                        }
+                                        res.render('site/index', { posts: following_posts, user: user, like: like, users: users, following_num: following_num, follower_num: follower_num });
+                                    });
+                                }
+                                else{
+                                    Post.find({user: req.session.userId, isDeleted: false}).populate({ path: 'user', model: User }).populate({ path: 'likes', model: Like }).populate({ path: 'comment', model: Comment }).sort({ $natural: -1 }).then( following_posts => {
+                                        res.render('site/index', { posts: following_posts, user: user, like: like, users: users, following_num: following_num, follower_num: follower_num });
+                                    } );
+                                }
+                                
                             });
                         });
                     });

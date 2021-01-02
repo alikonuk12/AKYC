@@ -14,7 +14,7 @@ router.post('/newcomment', (req, res) => {
         }).then(comment => {
             Post.findByIdAndUpdate(req.body.post, { $push: { "comment": comment._id } }, { safe: true, upsert: true }, () => { });
         });
-        res.redirect('/');
+        res.redirect(req.get('referer'));
     });
 });
 
