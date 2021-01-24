@@ -68,6 +68,15 @@ router.get('/sign-up', (req, res) => {
 });
 
 router.post('/sign-up', (req, res) => {
+    const pass = req.body.password;
+    if(pass.length < 7){
+        req.session.sessionFlash = {
+            type: 'alert alert-warning',
+            message: 'Şifreniz en az 7 haneli olmalıdır!'
+        }
+        res.redirect(req.get('referer'));
+        return false;
+    } 
 
     const username = req.body.username;
     const name = req.body.name;
@@ -261,6 +270,14 @@ router.post('/changecoverphoto', (req, res) => {
 router.post('/changepassword', (req, res) => {
     const old_password = req.body.old;
     const new_password = req.body.new;
+    if(new_password.length < 7){
+        req.session.sessionFlash = {
+            type: 'alert alert-warning',
+            message: 'Yeni şifre 7 haneden az olduğu için şifreniz değiştirilmemiştir!'
+        }
+        res.redirect(req.get('referer'));
+        return false;
+    }
     const repeat_password = req.body.repeat;
     const hash_new = hashStrSync(req.body.new);
     const hash_old = hashStrSync(req.body.old);
@@ -270,7 +287,11 @@ router.post('/changepassword', (req, res) => {
             if (new_password == repeat_password) {
                 user.password = hash_new;
                 user.save();
-                res.redirect("/");
+                req.session.sessionFlash = {
+                    type: 'alert alert-success',
+                    message: 'Şifreniz başarıyla değiştirilmiştir!'
+                }
+                res.redirect(req.get('referer'));
             } else {
                 req.session.sessionFlash = {
                     type: 'alert alert-warning',

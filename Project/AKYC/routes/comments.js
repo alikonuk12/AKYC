@@ -24,7 +24,11 @@ router.post('/:id', (req, res) => {
     if (req.session.userId) {
         Comment.findById(req.params.id).then(comment => {
             Post.findById(comment.post).then(post => {
-                post.comment_number--;
+                if (post.comment_number > 0) {
+                    post.comment_number--;
+                } else {
+                    post.comment_number = 0;
+                }
                 post.save();
             });
         });

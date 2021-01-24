@@ -30,9 +30,21 @@ router.get('/forgotpassword', (req, res) => {
 router.post('/forgotpassword', (req, res) => {
     const generated_pass = generatePassword();
     const new_pass = hashStrSync(generated_pass);
+    var userEmail = req.body.email;
+
     User.findOne({ email: req.body.email }, function (err, user) {
-        user.password = new_pass;
-        user.save();
+        try {
+            user.password = new_pass;
+            user.save();
+        }
+        catch (err) {
+            console.log(err);
+            req.session.sessionFlash = {
+                type: 'alert alert-warning',
+                message: 'Email adresini doğru girdiğinizden emin olun!'
+            }
+            res.redirect(req.get('referer'));
+        }
     });
 
     const outputHTML = `

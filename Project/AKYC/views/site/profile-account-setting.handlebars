@@ -9,16 +9,16 @@
 				<div class="col-lg-3">
 					<div class="acc-leftbar">
 						<div class="nav nav-tabs" id="nav-tab" role="tablist">
-							<a class="nav-item nav-link active" id="nav-acc-tab" data-toggle="tab" href="#nav-acc"
+							{{!-- <a class="nav-item nav-link active" id="nav-acc-tab" data-toggle="tab" href="#nav-acc"
 								role="tab" aria-controls="nav-acc" aria-selected="true"><i
-									class="la la-cogs"></i>Account Setting</a>
-							<a class="nav-item nav-link" id="nav-status-tab" data-toggle="tab" href="#nav-status"
-								role="tab" aria-controls="nav-status" aria-selected="false"><i
+									class="la la-cogs"></i>Account Setting</a> --}}
+							<a class="nav-item nav-link active" id="nav-status-tab" data-toggle="tab" href="#nav-status"
+								role="tab" aria-controls="nav-status" aria-selected="true"><i
 									class="fa fa-line-chart"></i>Kullanıcı Bilgileri</a>
 							<a class="nav-item nav-link" id="nav-password-tab" data-toggle="tab" href="#nav-password"
 								role="tab" aria-controls="nav-password" aria-selected="false"><i
 									class="fa fa-lock"></i>Şifre Değiştirme</a>
-							<a class="nav-item nav-link" id="nav-notification-tab" data-toggle="tab"
+							{{!-- <a class="nav-item nav-link" id="nav-notification-tab" data-toggle="tab"
 								href="#nav-notification" role="tab" aria-controls="nav-notification"
 								aria-selected="false"><i class="fa fa-flash"></i>Notifications</a>
 							<a class="nav-item nav-link" id="nav-privcy-tab" data-toggle="tab" href="#privcy" role="tab"
@@ -28,20 +28,20 @@
 									class="fa fa-user-secret"></i>Security and Login</a>
 							<a class="nav-item nav-link" id="nav-privacy-tab" data-toggle="tab" href="#privacy"
 								role="tab" aria-controls="privacy" aria-selected="false"><i
-									class="fa fa-paw"></i>Privacy</a>
+									class="fa fa-paw"></i>Privacy</a> --}}
 							<a class="nav-item nav-link" id="nav-blockking-tab" data-toggle="tab" href="#blockking"
 								role="tab" aria-controls="blockking" aria-selected="false"><i
 									class="fa fa-cc-diners-club"></i>Doğrulama Talebi</a>
-							<a class="nav-item nav-link" id="nav-deactivate-tab" data-toggle="tab"
+							{{!-- <a class="nav-item nav-link" id="nav-deactivate-tab" data-toggle="tab"
 								href="#nav-deactivate" role="tab" aria-controls="nav-deactivate"
-								aria-selected="false"><i class="fa fa-random"></i>Deactivate Account</a>
+								aria-selected="false"><i class="fa fa-random"></i>Deactivate Account</a> --}}
 						</div>
 					</div>
 					<!--acc-leftbar end-->
 				</div>
 				<div class="col-lg-9">
 					<div class="tab-content" id="nav-tabContent">
-						<div class="tab-pane fade show active" id="nav-acc" role="tabpanel"
+						<div class="tab-pane fade show" id="nav-acc" role="tabpanel"
 							aria-labelledby="nav-acc-tab">
 							<div class="acc-setting">
 								<h3>Account Setting</h3>
@@ -96,35 +96,35 @@
 							</div>
 							<!--acc-setting end-->
 						</div>
-						<div class="tab-pane fade" id="nav-status" role="tabpanel" aria-labelledby="nav-status-tab">
-							<div class="acc-setting">
+						<div class="tab-pane fade show active" id="nav-status" role="tabpanel" aria-labelledby="nav-status-tab">
+							<div class="acc-setting active">
 								<h3>Kullanıcı Bilgileri</h3>
 								<div class="profile-bx-details">
 									<form action="/users/updateprofile" method="POST">
 										<div class="cp-field">
 											<h5>Ad</h5>
 											<div class="cpp-fiel">
-												<input type="text" name="name" placeholder="Ad" value="{{user.name}}">
+												<input type="text" name="name" placeholder="Ad" value="{{user.name}}" required>
 											</div>
 										</div>
 										<div class="cp-field">
 											<h5>Soyad</h5>
 											<div class="cpp-fiel">
 												<input type="text" name="surname" placeholder="Soyad"
-													value="{{user.surname}}">
+													value="{{user.surname}}" required>
 											</div>
 										</div>
 										<div class="cp-field">
 											<h5>Şehir</h5>
 											<div class="cpp-fiel">
 												<input type="text" name="city" placeholder="Şehir"
-													value="{{user.city}}">
+													value="{{user.city}}" required>
 											</div>
 										</div>
 										<div class="cp-field">
 											<h5>Meslek</h5>
 											<div class="cpp-fiel">
-												<input type="text" name="job" placeholder="Meslek" value="{{user.job}}">
+												<input type="text" name="job" placeholder="Meslek" value="{{user.job}}" required>
 											</div>
 										</div>
 										<div class="save-stngs pd2">
@@ -150,14 +150,14 @@
 									<div class="cp-field">
 										<h5>Eski Şifre</h5>
 										<div class="cpp-fiel">
-											<input type="password" name="old" placeholder="Eski şifrenizi giriniz.">
+											<input type="password" name="old" placeholder="Eski şifrenizi giriniz." required>
 											<i class="fa fa-lock"></i>
 										</div>
 									</div>
 									<div class="cp-field">
 										<h5>Yeni Şifre</h5>
 										<div class="cpp-fiel">
-											<input type="password" name="new" placeholder="Yeni şifrenizi giriniz.">
+											<input type="password" name="new" placeholder="Yeni şifrenizi giriniz." required>
 											<i class="fa fa-lock"></i>
 										</div>
 									</div>
@@ -165,7 +165,7 @@
 										<h5>Yeni Şifre (tekrar)</h5>
 										<div class="cpp-fiel">
 											<input type="password" name="repeat"
-												placeholder="Yeni şifrenizi tekrar giriniz.">
+												placeholder="Yeni şifrenizi tekrar giriniz." required>
 											<i class="fa fa-lock"></i>
 										</div>
 									</div>

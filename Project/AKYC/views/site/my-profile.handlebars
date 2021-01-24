@@ -116,7 +116,7 @@
 									</ul>
 								</div>
 								<!--user_pro_status end-->
-								<ul class="social_links">
+								{{!-- <ul class="social_links">
 									<li><a href="#" title=""><i class="la la-globe"></i> www.example.com</a></li>
 									<li><a href="#" title=""><i class="fa fa-facebook-square"></i>
 											Http://www.facebook.com/john...</a></li>
@@ -132,13 +132,13 @@
 											Http://www.instagram.com/john...</a></li>
 									<li><a href="#" title=""><i class="fa fa-youtube"></i>
 											Http://www.youtube.com/john...</a></li>
-								</ul>
+								</ul> --}}
 							</div>
 							<!--user_profile end-->
 							<div class="suggestions full-width">
 								<div class="sd-title">
 									<h3>People Viewed Profile</h3>
-									<i class="la la-ellipsis-v"></i>
+									{{!-- <i class="la la-ellipsis-v"></i> --}}
 								</div>
 								<!--sd-title end-->
 								<div class="suggestions-list">
@@ -209,14 +209,14 @@
 
 								<div class="star-descp">
 									<span>{{user.job}}</span>
-									<ul>
+									{{!-- <ul>
 										<li><i class="fa fa-star"></i></li>
 										<li><i class="fa fa-star"></i></li>
 										<li><i class="fa fa-star"></i></li>
 										<li><i class="fa fa-star"></i></li>
 										<li><i class="fa fa-star-half-o"></i></li>
 									</ul>
-									<a href="#" title="">Status</a>
+									<a href="#" title="">Status</a> --}}
 								</div>
 								<!--star-descp end-->
 								<div class="tab-feed st2 settingjb">
@@ -227,19 +227,19 @@
 												<span>Gönderiler</span>
 											</a>
 										</li>
-										<li data-tab="info-dd">
+										{{!-- <li data-tab="info-dd">
 											<a href="#" title="">
 												<img src="/images/ic2.png" alt="">
 												<span>Info</span>
 											</a>
-										</li>
+										</li> --}}
 										<li data-tab="saved-jobs">
 											<a href="#" title="">
 												<img src="/images/review.png" alt="">
 												<span>Yorumlarım</span>
 											</a>
 										</li>
-										<li data-tab="my-bids">
+										{{!-- <li data-tab="my-bids">
 											<a href="#" title="">
 												<img src="/images/ic5.png" alt="">
 												<span>Bids</span>
@@ -256,7 +256,7 @@
 												<img src="/images/ic4.png" alt="">
 												<span>Reviews</span>
 											</a>
-										</li>
+										</li> --}}
 										<!--
 										<li data-tab="payment-dd">
 											<a href="#" title="">
@@ -321,9 +321,9 @@
 													</div>
 													<div class="col-md-6 col-sm-12">
 														<ul class="bk-links bklink">
-															<li><a href="#" title=""><i class="la la-bookmark"></i></a>
+															<li><a href="#" title="">{{!-- <i class="la la-bookmark"></i> --}}</a>
 															</li>
-															<li><a href="#" title=""><i class="la la-envelope"></i></a>
+															<li><a href="#" title="">{{!-- <i class="la la-envelope"></i> --}}</a>
 															</li>
 														</ul>
 													</div>
@@ -885,10 +885,10 @@
 															<a href="#" title="" class="ed-opts-open"><i
 																	class="la la-ellipsis-v"></i></a>
 															<ul class="ed-options">
-																<li><a href="#" title="">Edit Post</a></li>
+																{{!-- <li><a href="#" title="">Edit Post</a></li>
 																<li><a href="#" title="">Unsaved</a></li>
 																<li><a href="#" title="">Unbid</a></li>
-																<li><a href="#" title="">Close</a></li>
+																<li><a href="#" title="">Close</a></li> --}}
 																<li>
 																	<form action="/posts/{{_id}}" method="POST">
 																		<button
@@ -919,7 +919,7 @@
 													<li><a href="#" class="com"><i class="fas fa-comment-alt"></i>
 														{{comment_number}} yorum</a></li>
 												</ul>
-												<a href="#"><i class="fas fa-eye"></i>Views 50</a>
+												{{!-- <a href="#"><i class="fas fa-eye"></i>Views 50</a> --}}
 											</div>
 										</div>
 										<!--post-bar end-->
@@ -957,7 +957,7 @@
 												<div class="comment_box">
 													<form action="/comments/newcomment" method="POST">
 														<input style="max-width: 74%;" type="text" name="content"
-															placeholder="Post a comment">
+															placeholder="Yorum ekle">
 														<input type="text" name="post" value="{{_id}}" hidden>
 														<button type="submit">Gönder</button>
 													</form>
@@ -2203,15 +2203,17 @@
 							</div>
 							<div class="widget widget-portfolio">
 								<div class="wd-heady">
-									<h3>Portfolio</h3>
+									<h3>Paylaştığınız Görseller</h3>
 									<img src="/images/photo-icon.png" alt="">
 								</div>
 								<div class="pf-gallery">
 									<ul>
-										<li><a href="#" title=""><img src="/images/resources/pf-gallery1.png"
+										{{#each posts}}
+										<li class="w-50 p-3"><a href="#" title=""><img src="{{post_image}}"
 													alt=""></a>
 										</li>
-										<li><a href="#" title=""><img src="/images/resources/pf-gallery2.png"
+										{{/each}}
+										{{!-- <li><a href="#" title=""><img src="/images/resources/pf-gallery2.png"
 													alt=""></a>
 										</li>
 										<li><a href="#" title=""><img src="/images/resources/pf-gallery3.png"
@@ -2240,7 +2242,7 @@
 										<li><a href="#" title=""><img src="/images/resources/pf-gallery11.png"
 													alt=""></a></li>
 										<li><a href="#" title=""><img src="/images/resources/pf-gallery12.png"
-													alt=""></a></li>
+													alt=""></a></li> --}}
 									</ul>
 								</div>
 								<!--pf-gallery end-->

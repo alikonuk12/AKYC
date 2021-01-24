@@ -34,28 +34,36 @@
 										<span>{{follower_num}}</span>
 									</li>
 									<li>
-										<a href="/users/{{user._id}}" title="">View Profile</a>
+										<a href="/users/{{user._id}}" title="">Profili Görüntüle</a>
 									</li>
 								</ul>
 							</div>
 							<!--user-data end-->
 							<div class="suggestions full-width">
 								<div class="sd-title">
-									<h3>Suggestions</h3>
-									<i class="la la-ellipsis-v"></i>
+									<h3>Önerilenler</h3>
+									{{!-- <i class="la la-ellipsis-v"></i> --}}
 								</div>
 								<!--sd-title end-->
 								<div class="suggestions-list">
+									{{#each suggestion}}
+
 									<div class="suggestion-usd">
-										<img src="images/resources/s1.png" alt="">
+										{{#if profile_image}}
+										<img style="width: 20%;" src="{{profile_image}}" alt="">
+										{{/if}}
+										{{#unless profile_image}}
+										<img style="width: 20%;" src="/images/resources/user-pic.png" alt="">
+										{{/unless}}
 										<div class="sgt-text">
-											<h4>Jessica William</h4>
-											<span>Graphic Designer</span>
+											<h4><a href="/users/profile/{{_id}}">{{username}}</a></h4>
+											<span>{{job}}</span>
 										</div>
-										<span><i class="la la-plus"></i></span>
+										{{!-- <span><i class="la la-plus"></i></span> --}}
 									</div>
-									<div class="suggestion-usd">
-										<img src="images/resources/s2.png" alt="">
+									{{/each}}
+									{{!-- <div class="suggestion-usd">
+										<img src="/images/resources/s2.png" alt="">
 										<div class="sgt-text">
 											<h4>John Doe</h4>
 											<span>PHP Developer</span>
@@ -96,7 +104,7 @@
 									</div>
 									<div class="view-more">
 										<a href="#" title="">View More</a>
-									</div>
+									</div> --}}
 								</div>
 								<!--suggestions-list end-->
 							</div>
@@ -124,14 +132,24 @@
 					<div class="col-lg-6 col-md-8 no-pd">
 						<div class="main-ws-sec">
 							<div class="post-topbar">
-								<div class="user-picy">
-									<img src="images/resources/user-pic.png" alt="">
-								</div>
-								<div class="post-st">
-									<ul>
-										<!--<li><a class="post_project" href="#" title="">Post a Project</a></li>-->
-										<li><a class="post-jb active" href="#" title="">Paylaş</a></li>
-									</ul>
+								<div class="row">
+									<div class="col-md-2 user-picy">
+										<div style="min-width: 3.5rem; max-width: 3.5rem;">
+											{{#if user.profile_image}}
+											<img src="{{user.profile_image}}" alt="">
+											{{/if}}
+											{{#unless user.profile_image}}
+											<img src="/images/resources/user-pic.png" alt="">
+											{{/unless}}
+										</div>
+									</div>
+									<div class="col-md-7"><div class="float-left font-weight-bold" style="color:#808B96; font-size:larger; margin: 0; position: absolute; top: 50%; -ms-transform: translateY(-50%); transform: translateY(-50%);">Ne düşünüyorsun ?</div></div>
+									<div class="col-md-3 post-st">
+										<ul style="margin-left: 1.5rem; position: absolute; top: 50%; -ms-transform: translateY(-50%); transform: translateY(-50%);">
+											<!--<li><a class="post_project" href="#" title="">Post a Project</a></li>-->
+											<li><a class="post-jb active" href="#" title="">Paylaş</a></li>
+										</ul>
+									</div>
 								</div>
 								<!--post-st end-->
 							</div>
@@ -197,26 +215,26 @@
 								<div class="top-profiles">
 									<div class="pf-hd">
 										<h3>Yeni Kullanıcılar</h3>
-										<i class="la la-ellipsis-v"></i>
+										{{!-- <i class="la la-ellipsis-v"></i> --}}
 									</div>
 									<div class="profiles-slider">
 										{{#each users}}
 										<div class="user-profy">
 											{{#if profile_image}}
-											<img style="width: 60px; height: 60px;" src="{{profile_image}}"
-												alt="">
+											<img style="width: 60px; height: 60px;" src="{{profile_image}}" alt="">
 											{{/if}}
 											{{#unless profile_image}}
-											<img style="width: 60px; height: 60px;" src="/images/resources/us-pc2.png" alt="">
+											<img style="width: 60px; height: 60px;" src="/images/resources/us-pc2.png"
+												alt="">
 											{{/unless}}
-											<h3>{{username}}</h3>
+											<h2>{{username}}</h2>
 											<span>{{job}}</span>
 											<ul>
-												<li><a style="color: white;" id={{ _id }} onclick="actOnFollow(event);" data-post-id="{{ _id }}"
-										title="" class="follow">Follow</a></li>
-												<li><a href="#" title="" class="envlp"><img src="images/envelop.png"
+												<li><a style="color: white;" id={{ _id }} onclick="actOnFollow(event);"
+														data-post-id="{{ _id }}" title="" class="follow">Follow</a></li>
+												{{!-- <li><a href="#" title="" class="envlp"><img src="images/envelop.png"
 															alt=""></a></li>
-												<li><a href="#" title="" class="hire">hire</a></li>
+												<li><a href="#" title="" class="hire">hire</a></li> --}}
 											</ul>
 											<a href="/users/profile/{{_id}}" title="">Profili Görüntüle</a>
 										</div>
@@ -309,7 +327,7 @@
 														<img src="/images/resources/us-pc2.png" alt="">
 														{{/unless}}
 														<div class="usy-name" style="margin-top: 2%;">
-															<h2 style="font-weight: bold;">{{user.username}}</h2>
+															<a href="/users/profile/{{user._id}}"><h2 style="font-weight: bold;">{{user.username}}</h2></a>
 															<span><img src="/images/clock.png" alt="">{{
 																generateDate date
 																'DD-MM-YYYY' }}</span>
@@ -340,8 +358,8 @@
 												</div>
 												<div class="col-sm-1">
 													<div class="ed-opts">
-														<a href="#" title="" class="ed-opts-open"><i
-																class="la la-ellipsis-v"></i></a>
+														{{!-- <a href="#" title="" class="ed-opts-open"><i
+																class="la la-ellipsis-v"></i></a> --}}
 														<ul class="ed-options">
 															<li><a href="#" title="">Edit Post</a></li>
 															<li><a href="#" title="">Unsaved</a></li>
@@ -363,10 +381,10 @@
 														aria-controls="collapseExample" id="likes-count-{{ _id }}">{{
 														like_number }}</span>
 												</li>
-												<li><a href="#" class="com"><i class="fas fa-comment-alt"></i> 
+												<li><a href="#" class="com"><i class="fas fa-comment-alt"></i>
 														{{comment_number}} yorum</a></li>
 											</ul>
-											<a href="#"><i class="fas fa-eye"></i>Views 50</a>
+											{{!-- <a href="#"><i class="fas fa-eye"></i>Views 50</a> --}}
 										</div>
 									</div>
 									<!--<div class="collapse" id="collapseExample{{_id}}">
@@ -385,10 +403,10 @@
 													{{#each comment}}
 													<div class="comment-list">
 														<div class="bg-img">
-															<img src="/images/resources/bg-img1.png" alt="">
+															<img src="{{user.profile_image}}" alt="">
 														</div>
 														<div class="comment">
-															<h3>{{username}}</h3>
+															<a href="/users/profile/{{user._id}}"><h3> {{username}}</h3></a>
 															<span><img src="/images/clock.png" alt=""> {{ generateDate
 																date 'DD-MM-YYYY' }}</span>
 															<p>{{content}}</p>
@@ -404,7 +422,7 @@
 										<!--comment-sec end-->
 										<div class="post-comment">
 											<div class="cm_img">
-												<img src="images/resources/bg-img4.png" alt="">
+												{{!-- <img src="images/resources/bg-img4.png" alt=""> --}}
 											</div>
 											<div class="comment_box">
 												<form action="/comments/newcomment" method="POST">
@@ -421,13 +439,13 @@
 								</div>
 								<!--posty end-->
 								{{/each}}
-								<div class="process-comm">
+								{{!-- <div class="process-comm">
 									<div class="spinner">
 										<div class="bounce1"></div>
 										<div class="bounce2"></div>
 										<div class="bounce3"></div>
 									</div>
-								</div>
+								</div> --}}
 								<!--process-comm end-->
 							</div>
 							<!--posts-section end-->
@@ -436,7 +454,7 @@
 					</div>
 					<div class="col-lg-3 pd-right-none no-pd">
 						<div class="right-sidebar">
-							<div class="widget widget-about">
+							{{!-- <div class="widget widget-about">
 								<img src="images/wd-logo.png" alt="">
 								<h3>Track Time on Workwise</h3>
 								<span>Pay only for the Hours worked</span>
@@ -444,9 +462,9 @@
 									<h3><a href="sign-in.html" title="">Sign up</a></h3>
 									<a href="#" title="">Learn More</a>
 								</div>
-							</div>
+							</div> --}}
 							<!--widget-about end-->
-							<div class="widget widget-jobs">
+							{{!-- <div class="widget widget-jobs">
 								<div class="sd-title">
 									<h3>Top Jobs</h3>
 									<i class="la la-ellipsis-v"></i>
@@ -504,9 +522,9 @@
 									<!--job-info end-->
 								</div>
 								<!--jobs-list end-->
-							</div>
+							</div> --}}
 							<!--widget-jobs end-->
-							<div class="widget widget-jobs">
+							{{!-- <div class="widget widget-jobs">
 								<div class="sd-title">
 									<h3>Most Viewed This Week</h3>
 									<i class="la la-ellipsis-v"></i>
@@ -544,24 +562,26 @@
 									<!--job-info end-->
 								</div>
 								<!--jobs-list end-->
-							</div>
+							</div> --}}
 							<!--widget-jobs end-->
 							<div class="widget suggestions full-width">
-								<div class="sd-title">
-									<h3>Most Viewed People</h3>
-									<i class="la la-ellipsis-v"></i>
+								{{!-- <div class="sd-title">
+									<h3>En Çok Takip Edilenler</h3>
+									{{!-- <i class="la la-ellipsis-v"></i> --}}
 								</div>
 								<!--sd-title end-->
 								<div class="suggestions-list">
+									{{#each most_followers}}
 									<div class="suggestion-usd">
-										<img src="images/resources/s1.png" alt="">
+										<img src="{{profile_image}}" alt="">
 										<div class="sgt-text">
-											<h4>Jessica William</h4>
-											<span>Graphic Designer</span>
+											<a href="/users/profile/{{_id}}"><h4>{{name}}</h4></a>
+											<span>{{job}}</span>
 										</div>
-										<span><i class="la la-plus"></i></span>
+										{{!-- <span><i class="la la-plus"></i></span> --}}
 									</div>
-									<div class="suggestion-usd">
+									{{/each}}
+									{{!-- <div class="suggestion-usd">
 										<img src="images/resources/s2.png" alt="">
 										<div class="sgt-text">
 											<h4>John Doe</h4>
@@ -603,7 +623,7 @@
 									</div>
 									<div class="view-more">
 										<a href="#" title="">View More</a>
-									</div>
+									</div> --}}
 								</div>
 								<!--suggestions-list end-->
 							</div>
@@ -707,7 +727,7 @@
 								</div>
 							</div>-->
 					<div class="col-lg-12">
-						<textarea name="content" placeholder="İçerik"></textarea>
+						<textarea name="content" placeholder="İçerik" required></textarea>
 					</div>
 					<div class="col-lg-12">
 						<input class="form-control" name="post_image" type="file">
@@ -729,7 +749,7 @@
 <!--post-project-popup end-->
 
 
-
+{{!-- 
 <div class="chatbox-list">
 	<div class="chatbox">
 		<div class="chat-mg">
@@ -888,7 +908,7 @@
 		</div>
 		<!--conversation-box end-->
 	</div>
-</div>
+</div> --}}
 <!--chatbox-list end-->
 
 </div>
@@ -958,60 +978,60 @@
 {{!-- <---yaren---> --}}
 
 
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script>
-	var updateFollowStats = {
-		Follow: function (postId) {
-			document.querySelector('#likes-count-' + postId).textContent++;
-		},
-		Unfollow: function (postId) {
-			document.querySelector('#likes-count-' + postId).textContent--;
-		}
-	};
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script>
+		var updateFollowStats = {
+			Follow: function (postId) {
+				document.querySelector('#likes-count-' + postId).textContent++;
+			},
+			Unfollow: function (postId) {
+				document.querySelector('#likes-count-' + postId).textContent--;
+			}
+		};
 
-	var toggleFollowText = {
-		Follow: function (button) {
-			button.textContent = "Unfollow";
-		},
-		Unfollow: function (button) {
-			button.textContent = "Follow";
-		}
-	};
+		var toggleFollowText = {
+			Follow: function (button) {
+				button.textContent = "Unfollow";
+			},
+			Unfollow: function (button) {
+				button.textContent = "Follow";
+			}
+		};
 
-	var actOnFollow = function (event) {
-		var followId = event.target.dataset.postId;
-		var followstatus = event.target.textContent.trim();
-		toggleFollowText[followstatus](event.target);
-		//updateFollowStats[action](followId);
-		axios.post('/follow/' + followId + '/act', { followstatus: followstatus });
-	};
-</script>
+		var actOnFollow = function (event) {
+			var followId = event.target.dataset.postId;
+			var followstatus = event.target.textContent.trim();
+			toggleFollowText[followstatus](event.target);
+			//updateFollowStats[action](followId);
+			axios.post('/follow/' + followId + '/act', { followstatus: followstatus });
+		};
+	</script>
 
-<script>
+	<script>
 
-	$(document).ready(function () {
-		$.ajax(
-			{
-				type: 'GET',
-				url: '/follow/follows',
-				contentType: 'application/json',
-				success: function (response) {
-					let user_following = response.data;
-					console.log(user_following);
-					let follow_text = document.getElementsByClassName('follow');
-					for (let i = 0; i < follow_text.length; i++) {
-						for (let j = 0; j < user_following.length; j++) {
-							if (follow_text[i].id == user_following[j].following) {
-								follow_text[i].innerHTML = 'Unfollow';
-								break;
+		$(document).ready(function () {
+			$.ajax(
+				{
+					type: 'GET',
+					url: '/follow/follows',
+					contentType: 'application/json',
+					success: function (response) {
+						let user_following = response.data;
+						console.log(user_following);
+						let follow_text = document.getElementsByClassName('follow');
+						for (let i = 0; i < follow_text.length; i++) {
+							for (let j = 0; j < user_following.length; j++) {
+								if (follow_text[i].id == user_following[j].following) {
+									follow_text[i].innerHTML = 'Unfollow';
+									break;
+								}
 							}
 						}
+					},
+					failure: function (response) {
+						console.log(response);
 					}
-				},
-				failure: function (response) {
-					console.log(response);
 				}
-			}
-		);
-	});
-</script>
+			);
+		});
+	</script>

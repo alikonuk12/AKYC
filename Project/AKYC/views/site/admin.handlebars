@@ -103,7 +103,7 @@
 									</div>
 								</div>
 								<!--user-pro-img end-->
-								<div class="user_pro_status">
+								{{!-- <div class="user_pro_status">
 									<ul class="flw-status">
 										<li>
 											<span>Takip edilen</span>
@@ -132,10 +132,10 @@
 											Http://www.instagram.com/john...</a></li>
 									<li><a href="#" title=""><i class="fa fa-youtube"></i>
 											Http://www.youtube.com/john...</a></li>
-								</ul>
+								</ul> --}}
 							</div>
 							<!--user_profile end-->
-							<div class="suggestions full-width">
+							{{!-- <div class="suggestions full-width">
 								<div class="sd-title">
 									<h3>People Viewed Profile</h3>
 									<i class="la la-ellipsis-v"></i>
@@ -195,7 +195,7 @@
 									</div>
 								</div>
 								<!--suggestions-list end-->
-							</div>
+							</div> --}}
 							<!--suggestions end-->
 						</div>
 						<!--main-left-sidebar end-->
@@ -206,14 +206,14 @@
 								<h3>{{admin.username}} </h3>
 								<div class="star-descp">
 									<span>{{admin.email}}</span>
-									<ul>
+									{{!-- <ul>
 										<li><i class="fa fa-star"></i></li>
 										<li><i class="fa fa-star"></i></li>
 										<li><i class="fa fa-star"></i></li>
 										<li><i class="fa fa-star"></i></li>
 										<li><i class="fa fa-star-half-o"></i></li>
 									</ul>
-									<a href="#" title="">Status</a>
+									<a href="#" title="">Status</a> --}}
 								</div>
 								<!--star-descp end-->
 								<div class="tab-feed st2 settingjb">
@@ -318,9 +318,9 @@
 													</div>
 													<div class="col-md-6 col-sm-12">
 														<ul class="bk-links bklink">
-															<li><a href="#" title=""><i class="la la-bookmark"></i></a>
+															<li><a href="#" title="">{{!-- <i class="la la-bookmark"></i> --}}</a>
 															</li>
-															<li><a href="#" title=""><i class="la la-envelope"></i></a>
+															<li><a href="#" title="">{{!-- <i class="la la-envelope"></i> --}}</a>
 															</li>
 														</ul>
 													</div>
@@ -854,15 +854,15 @@
 													<a href="#" title="" class="ed-opts-open"><i
 															class="la la-ellipsis-v"></i></a>
 													<ul class="ed-options">
-														<li><a href="#" title="">Edit Post</a></li>
+														{{!-- <li><a href="#" title="">Edit Post</a></li>
 														<li><a href="#" title="">Unsaved</a></li>
 														<li><a href="#" title="">Unbid</a></li>
-														<li><a href="#" title="">Close</a></li>
+														<li><a href="#" title="">Close</a></li> --}}
 														<li>
 															<form action="/posts/{{_id}}" method="POST">
 																<button
 																	style="color: #686868; background-color: white; font-size: 14px; font-weight: 600; border:#686868"
-																	type="submit">Delete</button>
+																	type="submit">Gönderiyi Sil</button>
 															</form>
 														</li>
 													</ul>
@@ -876,8 +876,8 @@
 													</li>
 												</ul>
 												<ul class="bk-links">
-													<li><a href="#" title=""><i class="la la-bookmark"></i></a></li>
-													<li><a href="#" title=""><i class="la la-envelope"></i></a></li>
+													{{!-- <li><a href="#" title=""><i class="la la-bookmark"></i></a></li>
+													<li><a href="#" title=""><i class="la la-envelope"></i></a></li> --}}
 												</ul>
 											</div>
 											<div class="job_descp">
@@ -887,7 +887,7 @@
 											</div>
 											<div class="job-status-bar">
 												<ul class="like-com">
-													<li>
+													{{!-- <li>
 														<a id={{ _id }} onclick="actOnPost(event);"
 															data-post-id="{{ _id }}" class="likeText"> Like</a>
 														<img src="images/liked-img.png" alt="">
@@ -895,12 +895,11 @@
 															href="#collapseExample{{_id}}" role="button"
 															aria-expanded="false" aria-controls="collapseExample"
 															id="likes-count-{{ _id }}">{{ like_number }}</span>
-													</li>
+													</li> --}}
 													<li><a href="#" class="com"><i class="fas fa-comment-alt"></i>
-															Comment
-															15</a></li>
+															{{comment_number}} Yorum</a></li>
 												</ul>
-												<a href="#"><i class="fas fa-eye"></i>Views 50</a>
+												{{!-- <a href="#"><i class="fas fa-eye"></i>Views 50</a> --}}
 											</div>
 										</div>
 										<!--post-bar end-->
@@ -938,9 +937,9 @@
 												<div class="comment_box">
 													<form action="/comments/newcomment" method="POST">
 														<input style="max-width: 74%;" type="text" name="content"
-															placeholder="Post a comment">
+															placeholder="Yorum yap" disabled>
 														<input type="text" name="post" value="{{_id}}" hidden>
-														<button type="submit">Gönder</button>
+														<button type="submit" disabled>Gönder</button>
 													</form>
 												</div>
 											</div>
@@ -2200,7 +2199,7 @@
 							<div class="message-btn">
 								<a href="/users/logout" title=""><i class="tc"></i> Logout</a>
 							</div>
-							<div class="widget widget-portfolio">
+							{{!-- <div class="widget widget-portfolio">
 								<div class="wd-heady">
 									<h3>Portfolio</h3>
 									<img src="/images/photo-icon.png" alt="">
@@ -2243,7 +2242,7 @@
 									</ul>
 								</div>
 								<!--pf-gallery end-->
-							</div>
+							</div> --}}
 							<!--widget-portfolio end-->
 						</div>
 						<!--right-sidebar end-->
