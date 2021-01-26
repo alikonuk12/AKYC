@@ -7,7 +7,7 @@ const path = require('path');
 const VerRequest = require('../models/VerRequest');
 const Following = require('../models/Following');
 const Follower = require('../models/Follower');
- //const Admin = require('../models/Admin');
+//const Admin = require('../models/Admin');
 
 const bcrypt = require('bcrypt');
 const saltRounds = 12;
@@ -69,14 +69,14 @@ router.get('/sign-up', (req, res) => {
 
 router.post('/sign-up', (req, res) => {
     const pass = req.body.password;
-    if(pass.length < 7){
+    if (pass.length < 7) {
         req.session.sessionFlash = {
             type: 'alert alert-warning',
             message: 'Şifreniz en az 7 haneli olmalıdır!'
         }
         res.redirect(req.get('referer'));
         return false;
-    } 
+    }
 
     const username = req.body.username;
     const name = req.body.name;
@@ -115,51 +115,53 @@ router.get('/:id', (req, res) => {
     User.findById(req.session.userId).then(user => {
         Post.find({ user: user._id, isDeleted: false }).populate({ path: 'user', model: User }).populate({ path: 'comment', model: Comment }).sort({ $natural: -1 }).then(posts => {
             Comment.find({ user: req.session.userId }).sort({ $natural: -1 }).populate({ path: 'user', model: User }).then(comments => {
-                User.aggregate([
-                    {
-                        $lookup: {
-                            from: 'followings',
-                            localField: '_id',
-                            foreignField: 'userId',
-                            as: 'followings'
-                        }
-                    },
-                    {
-                        $project: {
-                            _id: 1,
-                            num_of_following: { $size: '$followings' }
-                        }
-                    }
-                ]).then((num_of_following) => {
+                User.find({ city: user.city, _id: { $ne: req.session.userId } }).limit(10).then(suggestion => {
                     User.aggregate([
                         {
                             $lookup: {
-                                from: 'followers',
+                                from: 'followings',
                                 localField: '_id',
                                 foreignField: 'userId',
-                                as: 'followers'
+                                as: 'followings'
                             }
                         },
                         {
                             $project: {
                                 _id: 1,
-                                num_of_follower: { $size: '$followers' }
+                                num_of_following: { $size: '$followings' }
                             }
                         }
-                    ]).then(num_of_follower => {
-                        const following_result = num_of_following.filter(followingnum => {
-                            if (followingnum._id == req.session.userId) {
-                                return followingnum;
+                    ]).then((num_of_following) => {
+                        User.aggregate([
+                            {
+                                $lookup: {
+                                    from: 'followers',
+                                    localField: '_id',
+                                    foreignField: 'userId',
+                                    as: 'followers'
+                                }
+                            },
+                            {
+                                $project: {
+                                    _id: 1,
+                                    num_of_follower: { $size: '$followers' }
+                                }
                             }
+                        ]).then(num_of_follower => {
+                            const following_result = num_of_following.filter(followingnum => {
+                                if (followingnum._id == req.session.userId) {
+                                    return followingnum;
+                                }
+                            });
+                            const follower_result = num_of_follower.filter(followernum => {
+                                if (followernum._id == req.session.userId) {
+                                    return followernum;
+                                }
+                            });
+                            const following_num = following_result[0].num_of_following;
+                            const follower_num = follower_result[0].num_of_follower;
+                            res.render('site/my-profile', { user: user, posts: posts, comments: comments, following_num: following_num, follower_num: follower_num, suggestion: suggestion });
                         });
-                        const follower_result = num_of_follower.filter(followernum => {
-                            if (followernum._id == req.session.userId) {
-                                return followernum;
-                            }
-                        });
-                        const following_num = following_result[0].num_of_following;
-                        const follower_num = follower_result[0].num_of_follower;
-                        res.render('site/my-profile', { user: user, posts: posts, comments: comments, following_num: following_num, follower_num: follower_num });
                     });
                 });
             });
@@ -194,51 +196,53 @@ router.get('/profile/:id', (req, res) => {
         Post.find({ user: searchedUser._id, isDeleted: false }).populate({ path: 'user', model: User }).populate({ path: 'comment', model: Comment }).sort({ $natural: -1 }).then(posts => {
             Comment.find({ user: req.session.userId }).sort({ $natural: -1 }).then(comments => {
                 User.findById(req.session.userId).then(user => {
-                    User.aggregate([
-                        {
-                            $lookup: {
-                                from: 'followings',
-                                localField: '_id',
-                                foreignField: 'userId',
-                                as: 'followings'
-                            }
-                        },
-                        {
-                            $project: {
-                                _id: 1,
-                                num_of_following: { $size: '$followings' }
-                            }
-                        }
-                    ]).then((num_of_following) => {
+                    User.find({ city: user.city, _id: { $ne: req.session.userId } }).limit(10).then(suggestion => {
                         User.aggregate([
                             {
                                 $lookup: {
-                                    from: 'followers',
+                                    from: 'followings',
                                     localField: '_id',
                                     foreignField: 'userId',
-                                    as: 'followers'
+                                    as: 'followings'
                                 }
                             },
                             {
                                 $project: {
                                     _id: 1,
-                                    num_of_follower: { $size: '$followers' }
+                                    num_of_following: { $size: '$followings' }
                                 }
                             }
-                        ]).then(num_of_follower => {
-                            const following_result = num_of_following.filter(followingnum => {
-                                if (followingnum._id == req.params.id) {
-                                    return followingnum;
+                        ]).then((num_of_following) => {
+                            User.aggregate([
+                                {
+                                    $lookup: {
+                                        from: 'followers',
+                                        localField: '_id',
+                                        foreignField: 'userId',
+                                        as: 'followers'
+                                    }
+                                },
+                                {
+                                    $project: {
+                                        _id: 1,
+                                        num_of_follower: { $size: '$followers' }
+                                    }
                                 }
+                            ]).then(num_of_follower => {
+                                const following_result = num_of_following.filter(followingnum => {
+                                    if (followingnum._id == req.params.id) {
+                                        return followingnum;
+                                    }
+                                });
+                                const follower_result = num_of_follower.filter(followernum => {
+                                    if (followernum._id == req.params.id) {
+                                        return followernum;
+                                    }
+                                });
+                                const following_num = following_result[0].num_of_following;
+                                const follower_num = follower_result[0].num_of_follower;
+                                res.render('site/user-profile', { searchedUser: searchedUser, posts: posts, comments: comments, user: user, following_num: following_num, follower_num: follower_num, suggestion: suggestion });
                             });
-                            const follower_result = num_of_follower.filter(followernum => {
-                                if (followernum._id == req.params.id) {
-                                    return followernum;
-                                }
-                            });
-                            const following_num = following_result[0].num_of_following;
-                            const follower_num = follower_result[0].num_of_follower;
-                            res.render('site/user-profile', { searchedUser: searchedUser, posts: posts, comments: comments, user: user, following_num: following_num, follower_num: follower_num });
                         });
                     });
                 });
@@ -270,7 +274,7 @@ router.post('/changecoverphoto', (req, res) => {
 router.post('/changepassword', (req, res) => {
     const old_password = req.body.old;
     const new_password = req.body.new;
-    if(new_password.length < 7){
+    if (new_password.length < 7) {
         req.session.sessionFlash = {
             type: 'alert alert-warning',
             message: 'Yeni şifre 7 haneden az olduğu için şifreniz değiştirilmemiştir!'
