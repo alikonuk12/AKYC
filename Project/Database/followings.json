@@ -1,0 +1,232 @@
+[{
+  "_id": {
+    "$oid": "6011b0f768c72a3e5cbaf480"
+  },
+  "userId": {
+    "$oid": "6011ad0868c72a3e5cbaf47d"
+  },
+  "following": {
+    "$oid": "6011a98668c72a3e5cbaf47b"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6011b0fb68c72a3e5cbaf482"
+  },
+  "userId": {
+    "$oid": "6011ad0868c72a3e5cbaf47d"
+  },
+  "following": {
+    "$oid": "6011a2f768c72a3e5cbaf479"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6011b10e68c72a3e5cbaf484"
+  },
+  "userId": {
+    "$oid": "6011a98668c72a3e5cbaf47b"
+  },
+  "following": {
+    "$oid": "6011ad0868c72a3e5cbaf47d"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6011b1d468c72a3e5cbaf48a"
+  },
+  "userId": {
+    "$oid": "6011ab1a68c72a3e5cbaf47c"
+  },
+  "following": {
+    "$oid": "6011a5bf68c72a3e5cbaf47a"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6011b1d868c72a3e5cbaf48c"
+  },
+  "userId": {
+    "$oid": "6011ab1a68c72a3e5cbaf47c"
+  },
+  "following": {
+    "$oid": "6011ad0868c72a3e5cbaf47d"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6011b24668c72a3e5cbaf490"
+  },
+  "userId": {
+    "$oid": "6011a2f768c72a3e5cbaf479"
+  },
+  "following": {
+    "$oid": "6011ad0868c72a3e5cbaf47d"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6011b28a68c72a3e5cbaf499"
+  },
+  "userId": {
+    "$oid": "6011a2f768c72a3e5cbaf479"
+  },
+  "following": {
+    "$oid": "6011af0468c72a3e5cbaf47e"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6011b2a068c72a3e5cbaf49b"
+  },
+  "userId": {
+    "$oid": "6011af0468c72a3e5cbaf47e"
+  },
+  "following": {
+    "$oid": "6011a2f768c72a3e5cbaf479"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6011b2c068c72a3e5cbaf49f"
+  },
+  "userId": {
+    "$oid": "6011af0468c72a3e5cbaf47e"
+  },
+  "following": {
+    "$oid": "6011ab1a68c72a3e5cbaf47c"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6011b2c268c72a3e5cbaf4a1"
+  },
+  "userId": {
+    "$oid": "6011af0468c72a3e5cbaf47e"
+  },
+  "following": {
+    "$oid": "6011a5bf68c72a3e5cbaf47a"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6011b2e768c72a3e5cbaf4a3"
+  },
+  "userId": {
+    "$oid": "6011a98668c72a3e5cbaf47b"
+  },
+  "following": {
+    "$oid": "6011a2f768c72a3e5cbaf479"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6011b2fd68c72a3e5cbaf4a5"
+  },
+  "userId": {
+    "$oid": "6011a98668c72a3e5cbaf47b"
+  },
+  "following": {
+    "$oid": "6011a5bf68c72a3e5cbaf47a"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6011b50c2e562130807485c1"
+  },
+  "userId": {
+    "$oid": "6011a5bf68c72a3e5cbaf47a"
+  },
+  "following": {
+    "$oid": "6011a2f768c72a3e5cbaf479"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6011b50d2e562130807485c3"
+  },
+  "userId": {
+    "$oid": "6011a5bf68c72a3e5cbaf47a"
+  },
+  "following": {
+    "$oid": "6011af0468c72a3e5cbaf47e"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6011b5102e562130807485c5"
+  },
+  "userId": {
+    "$oid": "6011a5bf68c72a3e5cbaf47a"
+  },
+  "following": {
+    "$oid": "6011ad0868c72a3e5cbaf47d"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6011b5112e562130807485c7"
+  },
+  "userId": {
+    "$oid": "6011a5bf68c72a3e5cbaf47a"
+  },
+  "following": {
+    "$oid": "6011ab1a68c72a3e5cbaf47c"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6011b5182e562130807485c9"
+  },
+  "userId": {
+    "$oid": "6011a5bf68c72a3e5cbaf47a"
+  },
+  "following": {
+    "$oid": "6011a98668c72a3e5cbaf47b"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6011b9c16e89f83d48edc20b"
+  },
+  "userId": {
+    "$oid": "6011ab1a68c72a3e5cbaf47c"
+  },
+  "following": {
+    "$oid": "6011a98668c72a3e5cbaf47b"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6011bb0c6e89f83d48edc20f"
+  },
+  "userId": {
+    "$oid": "6011a2f768c72a3e5cbaf479"
+  },
+  "following": {
+    "$oid": "6011a98668c72a3e5cbaf47b"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6011bb5e6e89f83d48edc211"
+  },
+  "userId": {
+    "$oid": "6011a2f768c72a3e5cbaf479"
+  },
+  "following": {
+    "$oid": "6011ab1a68c72a3e5cbaf47c"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6011bb616e89f83d48edc213"
+  },
+  "userId": {
+    "$oid": "6011a2f768c72a3e5cbaf479"
+  },
+  "following": {
+    "$oid": "6011a5bf68c72a3e5cbaf47a"
+  },
+  "__v": 0
+}]

@@ -1,0 +1,109 @@
+[{
+  "_id": {
+    "$oid": "6011a2f768c72a3e5cbaf479"
+  },
+  "isVerified": false,
+  "username": "alikonuk12",
+  "name": "Ali",
+  "surname": "Konuk",
+  "email": "alikonuk12@gmail.com",
+  "birthdate": {
+    "$date": "1994-11-29T00:00:00Z"
+  },
+  "city": "İstanbul",
+  "job": "Öğrenci",
+  "password": "$2b$12$L/393I46ZP1Qyu4E3a3TDek9dEjgaONu0KZRCLYFrAOslqPIj1.fi",
+  "__v": 0,
+  "profile_image": "/images/profileimage/ali.jpg",
+  "cover_image": "/images/coverimage/ali_cover.jpg"
+},{
+  "_id": {
+    "$oid": "6011a5bf68c72a3e5cbaf47a"
+  },
+  "isVerified": false,
+  "username": "yarencoskun",
+  "name": "Yaren",
+  "surname": "Çoşkun",
+  "email": "cosyar@gmail.com",
+  "birthdate": {
+    "$date": "1998-12-18T00:00:00Z"
+  },
+  "city": "İstanbul",
+  "job": "Öğrenci",
+  "password": "$2b$12$WjLHbW6Oc9vdMkbuKDoYSuFF0v/iL9TBNrEU3pJdK6xd39aq51ZiC",
+  "__v": 0,
+  "cover_image": "/images/coverimage/yaren_cover.png",
+  "profile_image": "/images/profileimage/yaren.png"
+},{
+  "_id": {
+    "$oid": "6011a98668c72a3e5cbaf47b"
+  },
+  "isVerified": false,
+  "username": "furkiyorulmaz",
+  "name": "Furkan",
+  "surname": "Yorulmaz",
+  "email": "furkanyorulmaz1@gmail.com",
+  "birthdate": {
+    "$date": "1998-04-02T00:00:00Z"
+  },
+  "city": "İstanbul",
+  "job": "Öğrenci",
+  "password": "$2b$12$DJ0x1yJNoxwDHs/lvvT75uzyw7d3RnpKQAh96AvDul9GgxHf0Jisu",
+  "__v": 0,
+  "profile_image": "/images/profileimage/furkan.png",
+  "cover_image": "/images/coverimage/furki_cover.jpg"
+},{
+  "_id": {
+    "$oid": "6011ab1a68c72a3e5cbaf47c"
+  },
+  "isVerified": false,
+  "username": "ahmetcanterlikci",
+  "name": "Ahmetcan",
+  "surname": "Terlikçi",
+  "email": "ahmetcan.22@hotmail.com",
+  "birthdate": {
+    "$date": "1999-04-15T00:00:00Z"
+  },
+  "city": "İstanbul",
+  "job": "Öğrenci",
+  "password": "$2b$12$QIT2OOR.bXpRT.tBuSUMoe34FBgZij2F3chNhWLQiA3zJjJebGIqS",
+  "__v": 0,
+  "profile_image": "/images/profileimage/ahmet.png",
+  "cover_image": "/images/coverimage/ahmet_cover.png"
+},{
+  "_id": {
+    "$oid": "6011ad0868c72a3e5cbaf47d"
+  },
+  "isVerified": false,
+  "username": "göksüpekacar",
+  "name": "Göksu",
+  "surname": "Pekacar",
+  "email": "goksu.pekacar@hotmail.com",
+  "birthdate": {
+    "$date": "1998-09-21T00:00:00Z"
+  },
+  "city": "İstanbul",
+  "job": "Öğrenci",
+  "password": "$2b$12$tJriXioE4NGv2VI3l7Qj5uVm3u3og2KAH4iq/LkylzlC7wyJ4UeEG",
+  "__v": 0,
+  "profile_image": "/images/profileimage/göksü.png",
+  "cover_image": "/images/coverimage/göksü_cover.jpeg"
+},{
+  "_id": {
+    "$oid": "6011af0468c72a3e5cbaf47e"
+  },
+  "isVerified": false,
+  "username": "fatihidgü",
+  "name": "Fatih Mehmet",
+  "surname": "İdgü",
+  "email": "fatih.idgu@isik.edu.tr",
+  "birthdate": {
+    "$date": "1997-11-01T00:00:00Z"
+  },
+  "city": "İstanbul",
+  "job": "Öğrenci",
+  "password": "$2b$12$LIcyd9ACiMrWSa.dlvdKY.X/Y0KhljvFZxsDV5DYwMy7UI710zQNm",
+  "__v": 0,
+  "profile_image": "/images/profileimage/fatih.jpg",
+  "cover_image": "/images/coverimage/fatih_cover.jpeg"
+}]

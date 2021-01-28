@@ -1,0 +1,115 @@
+[{
+  "_id": {
+    "$oid": "6011b0f368c72a3e5cbaf47f"
+  },
+  "like_number": 1,
+  "comment_number": 2,
+  "isDeleted": false,
+  "comment": [
+    {
+      "$oid": "6011b12a68c72a3e5cbaf487"
+    },
+    {
+      "$oid": "6011b8fb6e89f83d48edc207"
+    }
+  ],
+  "content": "bunu da sevmeyenin kendine saygısı yoktur",
+  "post_image": "/images/post_image/kokorec.jpg",
+  "user": {
+    "$oid": "6011ad0868c72a3e5cbaf47d"
+  },
+  "date": {
+    "$date": "2021-01-27T18:29:07.554Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6011b1bd68c72a3e5cbaf489"
+  },
+  "like_number": 1,
+  "comment_number": 1,
+  "isDeleted": false,
+  "comment": [
+    {
+      "$oid": "6011b23068c72a3e5cbaf48f"
+    }
+  ],
+  "content": "Önerebileceğiniz bir aşçılık kursu var mı?",
+  "user": {
+    "$oid": "6011a5bf68c72a3e5cbaf47a"
+  },
+  "date": {
+    "$date": "2021-01-27T18:32:29.172Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6011b28368c72a3e5cbaf496"
+  },
+  "like_number": 3,
+  "comment_number": 1,
+  "isDeleted": false,
+  "comment": [
+    {
+      "$oid": "6011b2b268c72a3e5cbaf49d"
+    }
+  ],
+  "content": "Spor için uygun diyet programları arıyorum. Fikri olan var mı?",
+  "user": {
+    "$oid": "6011a2f768c72a3e5cbaf479"
+  },
+  "date": {
+    "$date": "2021-01-27T18:35:47.018Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6011b43368c72a3e5cbaf4a8"
+  },
+  "like_number": 2,
+  "comment_number": 1,
+  "isDeleted": false,
+  "comment": [
+    {
+      "$oid": "6011b45368c72a3e5cbaf4aa"
+    },
+    {
+      "$oid": "6011b47a68c72a3e5cbaf4ab"
+    }
+  ],
+  "content": "Fransız mutfağı Fransa'nın bölgelerine göre büyük farklılıklar gösterir. Örneğin Champagne, Alsace ve Lorraine bölgelerinde jambon ve av etleri yaygındır. Picardie, Normandiya, Bretanya ve Nord-Pas-de-Calais gibi deniz kıyısındaki bölgelerde midye, karides ve ıstakoz gibi kabuklu deniz ürünleri, Ringa, levrek ve dil balığı sıkça kullanılır. Loire vadisinde koyun eti, av etleri, özellikle yetiştirilmiş mantar çeşitlerine ve keçi sütünden yapılmış peynirlere rastlanır. Gaskonya'nın başını çektiği güney batı mutfağının spesiyaliteleri pate, terin, ördek konfi ve magretdir. Bu bölge özellikle foie gras üretimi ile ünlüdür.",
+  "user": {
+    "$oid": "6011ab1a68c72a3e5cbaf47c"
+  },
+  "date": {
+    "$date": "2021-01-27T18:42:59.279Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6011b9836e89f83d48edc208"
+  },
+  "like_number": 1,
+  "comment_number": 3,
+  "isDeleted": false,
+  "comment": [
+    {
+      "$oid": "6011b9a06e89f83d48edc209"
+    },
+    {
+      "$oid": "6011b9cc6e89f83d48edc20d"
+    },
+    {
+      "$oid": "6011b9e76e89f83d48edc20e"
+    }
+  ],
+  "content": "İyi akşamlar gençleeeer",
+  "post_image": "/images/post_image/furkan_rakı.jpeg",
+  "user": {
+    "$oid": "6011a98668c72a3e5cbaf47b"
+  },
+  "date": {
+    "$date": "2021-01-27T19:05:39.622Z"
+  },
+  "__v": 0
+}]
