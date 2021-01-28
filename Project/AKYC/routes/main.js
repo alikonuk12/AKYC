@@ -64,12 +64,16 @@ router.get('/', function (req, res) {
                                         Following.find({ userId: req.session.userId }).then(following => {
                                             const following_posts = [];
                                             for (let i = 0; i < posts.length; i++) {
+                                                if(posts[i].user.id == req.session.userId){
+                                                    following_posts.push(posts[i]);
+                                                }
                                                 for (let j = 0; j < following.length; j++) {
-                                                    if (posts[i].user.id == following[j].following || posts[i].user.id == req.session.userId) {
+                                                    if (posts[i].user.id == following[j].following) {
                                                         following_posts.push(posts[i]);
                                                     }
                                                 }
                                             }
+                                            console.log(following_posts)
                                             res.render('site/index', { posts: following_posts, user: user, like: like, users: users, following_num: following_num, follower_num: follower_num, suggestion: suggestion });
                                         });
                                     }
